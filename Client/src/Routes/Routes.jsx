@@ -4,6 +4,8 @@ import {
   } from "react-router-dom";
 
 import MainLay from "../Layout/MainLay";
+import Singin from "../Components/SingIn/Singin";
+
 
 
   const router = createBrowserRouter([
@@ -11,6 +13,10 @@ import MainLay from "../Layout/MainLay";
       path: "/",
       element: <MainLay></MainLay>
     },
+    {
+      path: '/singin',
+      element: <Singin></Singin>
+    }
   ]);
 
 

@@ -26,6 +26,7 @@ import { FcCollaboration } from "react-icons/fc";
 import { FcContacts } from "react-icons/fc";
 
 import icon from "../../../public/icon.png";
+import { Link } from "react-router-dom";
 
 // profile menu component
 const profileMenuItems = [
@@ -172,7 +173,7 @@ export function ComplexNavbar() {
     <Navbar className="mx-auto max-w-screen-xl p-2 lg:rounded-3xl lg:pl-6">
       <div className="relative mx-auto flex items-center  justify-end text-blue-gray-900">
         <div className="flex items-center gap-80 ">
-          <Typography
+          <Typography       
             as="a"
             href="#"
             className="mr-4 ml-2 cursor-pointer py-1.5 font-medium"
@@ -200,9 +201,9 @@ export function ComplexNavbar() {
           <Bars2Icon className="h-6 w-6" />
         </IconButton>
 
-        <Button size="sm" variant="text">
+     <Link to={'/singin'}>   <Button size="sm" variant="text">
           <span>Log In</span>
-        </Button>
+        </Button></Link>
         <ProfileMenu />
       </div>
       <MobileNav open={isNavOpen} className="overflow-scroll">
