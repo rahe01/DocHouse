@@ -47,6 +47,9 @@ const client = new MongoClient(uri, {
 
 async function run() {
   try {
+
+    const userCollection = client.db('DocHouse').collection('users')
+
     // auth related api
     app.post('/jwt', async (req, res) => {
       const user = req.body
@@ -76,6 +79,34 @@ async function run() {
         res.status(500).send(err)
       }
     })
+    
+
+
+    // users related api
+    // save user in db
+    app.put('/user', async (req, res) => {
+      const user = req.body
+      const result = await userCollection.insertOne(user)
+      res.send(result)
+    })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     // Send a ping to confirm a successful connection
     await client.db('admin').command({ ping: 1 })

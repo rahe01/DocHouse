@@ -1,0 +1,78 @@
+[
+    {
+      "label": "Cavity Protection",
+      "value": "Cavity Protection",
+      "desc": "It really matters and then like it really doesn't matter. What matters is the people who are sparked by it. And the people who are like offended by it, it doesn't matter.",
+      "price": "$50 per session",
+      "duration": "30 minutes",
+      "provider": "Dr. John Doe",
+      "location": "Dental Clinic A, City B",
+      "contact": "+1234567890",
+      "rating": "4.5 stars",
+      "availability": "Monday to Friday, 9 AM to 5 PM",
+      "notes": "Recommended every 6 months",
+      "additional_info": "Includes fluoride treatment",
+      "image": "https://example.com/images/cavity_protection.jpg"
+    },
+    {
+      "label": "Cosmetic Dentistry",
+      "value": "Cosmetic Dentistry",
+      "desc": "Because it's about motivating the doers. Because I'm here to follow my dreams and inspire other people to follow their dreams, too.",
+      "price": "$200 per session",
+      "duration": "1 hour",
+      "provider": "Dr. Jane Smith",
+      "location": "Dental Clinic B, City C",
+      "contact": "+0987654321",
+      "rating": "4.8 stars",
+      "availability": "Tuesday to Saturday, 10 AM to 6 PM",
+      "notes": "Initial consultation required",
+      "additional_info": "Includes teeth whitening and veneers",
+      "image": "https://example.com/images/cosmetic_dentistry.jpg"
+    },
+    {
+      "label": "Oral Surgery",
+      "value": "Oral Surgery",
+      "desc": "We're not always in the position that we want to be at. We're constantly growing. We're constantly making mistakes. We're constantly trying to express ourselves and actualize our dreams.",
+      "price": "$500 per session",
+      "duration": "2 hours",
+      "provider": "Dr. Emily Brown",
+      "location": "Dental Clinic C, City D",
+      "contact": "+1122334455",
+      "rating": "4.7 stars",
+      "availability": "Wednesday to Sunday, 8 AM to 4 PM",
+      "notes": "Requires pre-surgery consultation",
+      "additional_info": "Includes post-surgery follow-up",
+      "image": "https://example.com/images/oral_surgery.jpg"
+    },
+    {
+      "label": "Teeth Cleaning",
+      "value": "Teeth Cleaning",
+      "desc": "Regular cleaning to maintain oral hygiene and prevent gum diseases. A bright smile starts with clean teeth.",
+      "price": "$75 per session",
+      "duration": "45 minutes",
+      "provider": "Dr. Michael Green",
+      "location": "Dental Clinic D, City E",
+      "contact": "+2233445566",
+      "rating": "4.6 stars",
+      "availability": "Monday to Saturday, 9 AM to 5 PM",
+      "notes": "Recommended every 3 months",
+      "additional_info": "Includes plaque and tartar removal",
+      "image": "https://example.com/images/teeth_cleaning.jpg"
+    },
+    {
+      "label": "Orthodontics",
+      "value": "Orthodontics",
+      "desc": "Specialized treatment for aligning and straightening teeth. A beautiful smile with well-aligned teeth.",
+      "price": "$300 per session",
+      "duration": "1.5 hours",
+      "provider": "Dr. Laura White",
+      "location": "Dental Clinic E, City F",
+      "contact": "+3344556677",
+      "rating": "4.9 stars",
+      "availability": "Tuesday to Friday, 10 AM to 4 PM",
+      "notes": "Initial assessment required",
+      "additional_info": "Includes braces and retainers",
+      "image": "https://example.com/images/orthodontics.jpg"
+    }
+  ]
+  

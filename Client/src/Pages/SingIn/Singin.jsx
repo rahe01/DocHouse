@@ -1,10 +1,15 @@
-import { Link } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { FcGoogle } from 'react-icons/fc'
 import useAuth from '../../Hooks/useAuth'
 import { toast } from 'react-toastify'
 
 
 const Singin = () => {
+
+  const navigate = useNavigate()
+  const location = useLocation()
+
+    const from = location?.state || '/'
 
   const { signIn, signInWithGoogle , loading , setLoading} = useAuth()
  
@@ -15,6 +20,7 @@ const Singin = () => {
         setLoading(false)
         const user = result.user
         toast.success('Login Successful')
+        navigate(from, { replace: true })
         console.log(user)
       })
       .catch(() => {
@@ -33,6 +39,7 @@ const Singin = () => {
         toast.success('Login Successful')
         console.log(user)
         form.reset()
+        navigate(from, { replace: true })
       })
       .catch(() => {
         toast.error("Something went wrong")
@@ -131,7 +138,7 @@ const Singin = () => {
         <p className='px-6 text-sm text-center text-gray-400'>
           Don&apos;t have an account yet?{' '}
           <Link
-            to='/signup'
+            to='/singup'
             className='hover:underline hover:text-rose-500 text-gray-600'
           >
             Sign up

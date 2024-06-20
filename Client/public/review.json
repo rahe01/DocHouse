@@ -1,0 +1,21 @@
+ [
+      {
+        "name": "John Doe",
+        "image": "https://i.ibb.co/0M3yMfj/pexels-moose-photos-170195-1036620.jpg",
+        "review": "Dr. Smith is amazing! The entire staff was friendly and professional. Highly recommend!"
+      },
+      
+      {
+        "name": "Alice Johnson",
+        "image": "https://i.ibb.co/YbdjH1X/pexels-andersonguerra-1197132.jpg",
+        "review": "The best dental care I have ever received. The clinic is clean and the staff is wonderful."
+      },
+      
+      {
+        "name": "Emily Davis",
+        "image": "https://i.ibb.co/MBkZrHz/pexels-moose-photos-170195-1036622.jpg",
+        "review": "Dr. Smith and his team were great. They made me feel comfortable and took good care of my teeth."
+      }
+    ]
+  
+  
