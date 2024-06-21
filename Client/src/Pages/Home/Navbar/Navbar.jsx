@@ -183,13 +183,14 @@ export function ComplexNavbar() {
       <div className="relative mx-auto flex items-center justify-end text-blue-gray-900">
         <div className="flex items-center gap-80">
           <Typography as="a" href="#" className="mr-4 ml-2 cursor-pointer py-1.5 font-medium">
+            <Link to={"/"}>
             <div className="flex items-center">
               <img src='https://i.ibb.co/d2pvBM8/icon.png' className="w-12" alt="" />
               <div className="ml-2 pt-1">
                 <span className="text-2xl text-purple-300 font-bold">Doc</span>
                 <span className="text-2xl text-blue-500 font-bold">House</span>
               </div>
-            </div>
+            </div></Link>
           </Typography>
           <div className="hidden lg:block">
             <NavList />

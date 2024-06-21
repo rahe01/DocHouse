@@ -7,6 +7,7 @@ import MainLay from "../Layout/MainLay";
 import Singin from "../Pages/SingIn/Singin";
 import SignUp from "../Pages/SingUp/SingUp";
 import HomeLay from "../Layout/HomeLay";
+import ServicesDetails from "../Pages/Home/Services/ServicesDetails/ServicesDetails";
 
 
 
@@ -19,6 +20,11 @@ import HomeLay from "../Layout/HomeLay";
         {
           index: true,
           element: <HomeLay></HomeLay>
+        },
+        {
+          path: '/services/:id',
+          element: <ServicesDetails></ServicesDetails>,
+          loader: ({ params }) => fetch(`${import.meta.env.VITE_API_URL}/services/${params.id}`)
         }
       ],
     },

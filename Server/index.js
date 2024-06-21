@@ -49,6 +49,7 @@ async function run() {
   try {
 
     const userCollection = client.db('DocHouse').collection('users')
+    const serviceCollection = client.db('DocHouse').collection('services')
 
     // auth related api
     app.post('/jwt', async (req, res) => {
@@ -79,10 +80,9 @@ async function run() {
         res.status(500).send(err)
       }
     })
-    
 
 
-    // users related api
+      // *************** User related api***********************
     // save user in db
     app.put('/user', async (req, res) => {
       const user = req.body
@@ -90,6 +90,31 @@ async function run() {
       res.send(result)
     })
 
+
+
+
+// *********************** Services related api********************
+
+    // get services data
+    app.get('/services', async (req, res) => {
+      const cursor = serviceCollection.find({})
+      const result = await cursor.toArray()
+      res.send(result)
+    })
+
+    // get single service
+    app.get('/services/:id', async (req, res) => {
+      const id = req.params.id
+      const query = { _id: new ObjectId(id) }
+      const result = await serviceCollection.findOne(query)
+      res.send(result)
+    })
+
+
+    
+
+
+  
 
 
 

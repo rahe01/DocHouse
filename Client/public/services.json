@@ -12,7 +12,7 @@
       "availability": "Monday to Friday, 9 AM to 5 PM",
       "notes": "Recommended every 6 months",
       "additional_info": "Includes fluoride treatment",
-      "image": "https://example.com/images/cavity_protection.jpg"
+      "image": "https://i.ibb.co/YhqJfXx/pexels-polina-zimmerman-3958092.jpg"
     },
     {
       "label": "Cosmetic Dentistry",
@@ -27,7 +27,7 @@
       "availability": "Tuesday to Saturday, 10 AM to 6 PM",
       "notes": "Initial consultation required",
       "additional_info": "Includes teeth whitening and veneers",
-      "image": "https://example.com/images/cosmetic_dentistry.jpg"
+      "image": "https://i.ibb.co/bBWLPTS/pexels-karolina-grabowska-6627597.jpg"
     },
     {
       "label": "Oral Surgery",
@@ -42,7 +42,7 @@
       "availability": "Wednesday to Sunday, 8 AM to 4 PM",
       "notes": "Requires pre-surgery consultation",
       "additional_info": "Includes post-surgery follow-up",
-      "image": "https://example.com/images/oral_surgery.jpg"
+      "image": "https://i.ibb.co/ZVr45w4/pexels-olly-3952008.jpg"
     },
     {
       "label": "Teeth Cleaning",
@@ -57,22 +57,23 @@
       "availability": "Monday to Saturday, 9 AM to 5 PM",
       "notes": "Recommended every 3 months",
       "additional_info": "Includes plaque and tartar removal",
-      "image": "https://example.com/images/teeth_cleaning.jpg"
+      "image": "https://i.ibb.co/bW6T5q7/pexels-karolina-grabowska-6627534.jpg"
     },
     {
       "label": "Emergency Care",
       "value": "Emergency Care",
-      "desc": "Specialized treatment for aligning and straightening teeth. A beautiful smile with well-aligned teeth.",
-      "price": "$300 per session",
-      "duration": "1.5 hours",
+      "desc": "Immediate and effective treatment for dental emergencies, including severe pain, injuries, and urgent dental issues.",
+      "price": "Varies based on treatment",
+      "duration": "Varies depending on the emergency",
       "provider": "Dr. Laura White",
       "location": "Dental Clinic E, City F",
       "contact": "+3344556677",
       "rating": "4.9 stars",
-      "availability": "Tuesday to Friday, 10 AM to 4 PM",
-      "notes": "Initial assessment required",
-      "additional_info": "Includes braces and retainers",
-      "image": "https://example.com/images/orthodontics.jpg"
+      "availability": "24/7 availability",
+      "notes": "Walk-ins welcome; immediate care provided",
+      "additional_info": "Includes emergency consultations, pain relief, and urgent dental procedures",
+      "image": "https://i.ibb.co/7KxYmZ0/pexels-monicore-134065.jpg"
     }
+    
   ]
   

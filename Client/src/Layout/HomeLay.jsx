@@ -4,7 +4,7 @@ import Review from "../Pages/Home/Review/Review";
 import Services from "../Pages/Home/Services/Services";
 import Doctor from "../Pages/Home/Doctor/Doctor";
 import Contact from "../Pages/Home/Contact/Contact";
-import Footer from "../Pages/Home/Footer/Footer";
+
 
 
 
@@ -17,7 +17,7 @@ const HomeLay = () => {
             <Review></Review>
             <Doctor></Doctor>
             <Contact></Contact>
-            <Footer></Footer>
+            
             
         </div>
     );
