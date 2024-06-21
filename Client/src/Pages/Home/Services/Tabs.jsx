@@ -4,11 +4,13 @@ import {
     TabsBody,
     Tab,
     TabPanel,
+   
     
   } from "@material-tailwind/react";
-  import Card from "./Card";
-  import data from "../../../public/services.json";
   
+  import data from "../../../../public/services.json";
+  import Card from './Card';
+
   export function TabsDefault() {
     // const data = [
     //   {

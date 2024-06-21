@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom";
-import { ComplexNavbar } from "../Components/Navbar/Navbar";
+import { ComplexNavbar } from './../Pages/Home/Navbar/Navbar';
+
 
 
 

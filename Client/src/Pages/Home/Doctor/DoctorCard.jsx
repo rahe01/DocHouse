@@ -1,6 +1,7 @@
 import { IoLocationSharp } from "react-icons/io5";
 import { FaCalendarPlus } from "react-icons/fa";
 import { AiFillDollarCircle } from "react-icons/ai";
+import Button from "../../../Components/Button/Button";
 
 const DoctorCard = () => {
   return (
@@ -66,7 +67,7 @@ const DoctorCard = () => {
 
 
           <div className="card-actions  w-full">
-          <button className="btn btn-outline w-full border-[#F7A582] hover:border-[#F7A582] hover:bg-[#F7A582] text-md text-[#F7A582] font-bold">View Profile</button>
+         <Button title="View Details"></Button>
           </div>
         </div>
       </div>

@@ -1,9 +1,11 @@
-import Contact from "../Components/Contact/Contact";
-import Doctor from "../Components/Doctor/Doctor";
-import Hero from "../Components/Hero/Hero";
-import LittleDetails from "../Components/LittleDetails/LittleDetails";
-import Review from "../Components/Review/Review";
-import Services from "../Components/Services/Services";
+import Hero from "../Pages/Home/Hero/Hero";
+import LittleDetails from "../Pages/Home/LittleDetails/LittleDetails";
+import Review from "../Pages/Home/Review/Review";
+import Services from "../Pages/Home/Services/Services";
+import Doctor from "../Pages/Home/Doctor/Doctor";
+import Contact from "../Pages/Home/Contact/Contact";
+import Footer from "../Pages/Home/Footer/Footer";
+
 
 
 const HomeLay = () => {
@@ -15,6 +17,7 @@ const HomeLay = () => {
             <Review></Review>
             <Doctor></Doctor>
             <Contact></Contact>
+            <Footer></Footer>
             
         </div>
     );

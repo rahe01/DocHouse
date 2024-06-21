@@ -60,8 +60,8 @@
       "image": "https://example.com/images/teeth_cleaning.jpg"
     },
     {
-      "label": "Orthodontics",
-      "value": "Orthodontics",
+      "label": "Emergency Care",
+      "value": "Emergency Care",
       "desc": "Specialized treatment for aligning and straightening teeth. A beautiful smile with well-aligned teeth.",
       "price": "$300 per session",
       "duration": "1.5 hours",

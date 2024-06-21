@@ -1,6 +1,6 @@
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
-import reviews from '../../../public/review.json';
+import reviews from '../../../../public/review.json';
 
 // Import Swiper styles
 import 'swiper/css';

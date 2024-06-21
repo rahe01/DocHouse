@@ -23,9 +23,10 @@ import {
 import { FaHome } from "react-icons/fa";
 import { FcCableRelease, FcCollaboration, FcContacts, FcAcceptDatabase } from "react-icons/fc";
 
-import icon from "../../../public/icon.png";
+
 import { Link, useNavigate } from "react-router-dom";
-import useAuth from "../../Hooks/useAuth";
+import useAuth from './../../../Hooks/useAuth';
+
 
 // Profile menu items
 const profileMenuItems = [
@@ -183,7 +184,7 @@ export function ComplexNavbar() {
         <div className="flex items-center gap-80">
           <Typography as="a" href="#" className="mr-4 ml-2 cursor-pointer py-1.5 font-medium">
             <div className="flex items-center">
-              <img src={icon} className="w-12" alt="" />
+              <img src='https://i.ibb.co/d2pvBM8/icon.png' className="w-12" alt="" />
               <div className="ml-2 pt-1">
                 <span className="text-2xl text-purple-300 font-bold">Doc</span>
                 <span className="text-2xl text-blue-500 font-bold">House</span>
