@@ -1,6 +1,8 @@
 
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useLocation, useNavigate, } from 'react-router-dom';
 import { FaDollarSign, FaClock, FaUserMd, FaMapMarkerAlt, FaPhone, FaStar, FaCalendarAlt, FaStickyNote, FaInfoCircle } from 'react-icons/fa';
+
+
 
 const ServicesDetails = () => {
  
@@ -21,6 +23,18 @@ const ServicesDetails = () => {
     additional_info,
     image
   } = data;
+
+  const navigate = useNavigate();
+  const locationdata = useLocation();
+
+  console.log(locationdata);
+
+  const handleBack = () => {
+   
+      navigate(-1); // Go back to the previous page
+
+  };
+
 
   return (
     <div className="p-6 max-w-4xl mx-auto bg-white shadow-md rounded-lg">
@@ -63,6 +77,7 @@ const ServicesDetails = () => {
         <FaInfoCircle className="mr-2 text-blue-400" />
         <p className="text-gray-700"><strong>Additional Info:</strong> {additional_info}</p>
       </div>
+      <button className="btn btn-outline w-full border-[#F7A582] hover:border-[#F7A582] hover:bg-[#F7A582] text-md text-[#F7A582] font-bold" onClick={handleBack}> Back to Services</button>
     </div>
   );
 };

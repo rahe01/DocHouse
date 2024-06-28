@@ -1,0 +1,59 @@
+{
+    "aboutSection": {
+      "clinicName": "DocHouse Dental Clinic",
+      "missionStatement": "Our mission is to provide exceptional dental care in a friendly and comfortable environment, ensuring every patient leaves with a brighter, healthier smile.",
+      "dentist": {
+        "name": "Dr. Sarah Johnson",
+        "qualification": "DDS, FAGD",
+        "bio": "Dr. Sarah Johnson has over 15 years of experience in the field of dentistry. She graduated from the University of California, San Francisco (UCSF) with honors and completed her residency at the prestigious UCLA School of Dentistry. Dr. Johnson is committed to providing the highest quality of dental care and is constantly updating her skills through continuing education courses.",
+        "specialties": [
+          "Cosmetic Dentistry",
+          "Implant Dentistry",
+          "Pediatric Dentistry",
+          "Orthodontics"
+        ],
+        "photo": "https://i.ibb.co/0YNwsT7/pexels-chokniti-khongchum-1197604-3938023.jpg"
+      },
+      "clinicDetails": {
+        "address": "123 Main Street, Suite 100, Anytown, USA",
+        "phone": "(123) 456-7890",
+        "email": "info@brightsmiles.com",
+        "workingHours": {
+          "monday": "9:00 AM - 6:00 PM",
+          "tuesday": "9:00 AM - 6:00 PM",
+          "wednesday": "9:00 AM - 6:00 PM",
+          "thursday": "9:00 AM - 6:00 PM",
+          "friday": "9:00 AM - 5:00 PM",
+          "saturday": "10:00 AM - 4:00 PM",
+          "sunday": "Closed"
+        }
+      },
+      "team": [
+        {
+          "name": "Emily Parker",
+          "role": "Dental Hygienist",
+          "bio": "Emily has been a dental hygienist at Bright Smiles for over 5 years. She is dedicated to helping patients achieve optimal oral health through education and preventative care.",
+          "photo": "https://i.ibb.co/dJF3p0f/pexels-polina-tankilevitch-3873193.jpg"
+        },
+        {
+          "name": "John Doe",
+          "role": "Dental Assistant",
+          "bio": "John is a certified dental assistant with a passion for patient care. He ensures that each visit is as comfortable and efficient as possible.",
+          "photo": "https://i.ibb.co/VpTj0NW/pexels-olly-3779695.jpg"
+        }
+      ],
+      "testimonials": [
+        {
+          "name": "Jane Smith",
+          "feedback": "Dr. Johnson and her team are amazing! They made me feel so comfortable and my teeth have never looked better.",
+          "date": "2024-01-15"
+        },
+        {
+          "name": "Michael Brown",
+          "feedback": "Great experience from start to finish. The staff is friendly and professional. Highly recommend!",
+          "date": "2024-02-10"
+        }
+      ]
+    }
+  }
+  

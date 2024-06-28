@@ -7,9 +7,12 @@ import Footer from "../Pages/Home/Footer/Footer";
 
 const MainLay = () => {
   return (
-    <div className="container mx-auto">
+    <div className="">
+      <div className="container mx-auto">
       <ComplexNavbar></ComplexNavbar>
       <Outlet></Outlet>
+      </div>
+
       <Footer></Footer>
     </div>
   );

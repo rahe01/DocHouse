@@ -7,10 +7,10 @@ const Contact = () => {
     <div>
       <div className="flex p-10  md:p-20 bg-[#07332F] text-white items-center justify-center flex-col md:flex-row rounded-xl">
         <div>
-          <h1 className="text-4xl font-bold ">Contact With Us</h1>
-          <p className=" font-medium text-xl p-3">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure,
-            tempora.
+          <h1 className="text-4xl font-bold">Contact With Us</h1>
+          <p className="font-medium text-xl p-5">
+            If you have any questions, feel free to reach out to us. We are here
+            to help you with any inquiries or support you may need.
           </p>
 
           <div className="flex items-center gap-2 py-2">
