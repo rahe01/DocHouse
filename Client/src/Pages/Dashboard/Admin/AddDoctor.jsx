@@ -9,12 +9,12 @@ import {
    FaDollarSign, FaStethoscope, FaLinkedin, FaFacebook,
   FaTwitter
 } from "react-icons/fa";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 const AddDoctor = () => {
-  const { user } = useAuth();
-  console.log(user);
-
+  const { user } = useAuth();    
   const navigate = useNavigate();
+  const axiosSecure = useAxiosSecure();
 
   const [doctor, setDoctor] = useState({
     name: "",
@@ -76,9 +76,19 @@ const AddDoctor = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(doctor);
-    toast.success("Doctor added successfully");
-    navigate("/my-added-doc");
+    
+    // doctor add in db
+    axiosSecure.post('/addDoctor' , doctor)
+    .then(data => {
+      console.log(data.data);
+      toast.success('Doctor added successfully')
+      navigate('/dashboard/my-added-doctors')
+    })
+    .catch(err => console.log(err))
+
+  
+
+
   };
 
   return (

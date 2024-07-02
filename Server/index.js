@@ -50,6 +50,7 @@ async function run() {
 
     const userCollection = client.db('DocHouse').collection('users')
     const serviceCollection = client.db('DocHouse').collection('services')
+    const doctorCollection = client.db('DocHouse').collection('doctors')
 
     // auth related api
     app.post('/jwt', async (req, res) => {
@@ -85,10 +86,26 @@ async function run() {
       // *************** User related api***********************
     // save user in db
     app.put('/user', async (req, res) => {
-      const user = req.body
-      const result = await userCollection.insertOne(user)
-      res.send(result)
-    })
+      const user = req.body;
+    
+      try {
+        // Check if the email already exists in the database
+        const existingUser = await userCollection.findOne({ email: user.email });
+    
+        if (existingUser) {
+          // If the email exists, return a response indicating that the user already exists
+          return res.status(400).send({ message: 'Email already exists in the database' });
+        }
+    
+        // If the email does not exist, insert the new user
+        const result = await userCollection.insertOne(user);
+        res.send(result);
+      } catch (error) {
+        // Handle any errors that occur during the database operation
+        res.status(500).send({ message: 'An error occurred', error });
+      }
+    });
+    
 
 
 
@@ -111,7 +128,59 @@ async function run() {
     })
 
 
-    
+
+    // ***********************Doctor Related api methods***********************
+
+    // add doctor
+    app.post('/addDoctor' , async (req, res) => {
+      const doctor = req.body
+      const result = await doctorCollection.insertOne(doctor)
+      res.send(result)
+    })
+
+    // get doctor by email
+    app.get('/doctor/:email', async (req, res) => {
+      const email = req.params.email;
+      try {
+        const query = { userEmail: email };
+        const results = await doctorCollection.find(query).toArray();
+        res.json(results);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        res.status(500).json({ error: 'Failed to fetch doctors' });
+      }
+    });
+
+    // doctor delete
+    app.delete('/doctor/:id', async (req, res) => {
+      const id = req.params.id
+      const query = { _id: new ObjectId(id) }
+      const result = await doctorCollection.deleteOne(query)
+      res.send(result)
+    })
+// Update doctor endpoint
+// Update doctor endpoint
+app.put('/updateDoctor/:id', async (req, res) => {
+  const id = req.params.id;
+  const updatedDoctor = req.body;
+
+  // Ensure _id is not included in the update
+  delete updatedDoctor._id;
+
+  try {
+    const query = { _id: new ObjectId(id) };
+    const result = await doctorCollection.updateOne(query, { $set: updatedDoctor });
+
+    if (result.modifiedCount === 1) {
+      res.json({ message: 'Doctor updated successfully' });
+    } else {
+      res.status(404).json({ error: 'Doctor not found' });
+    }
+  } catch (err) {
+    console.error('Error updating doctor:', err);
+    res.status(500).json({ error: 'Failed to update doctor' });
+  }
+});
 
 
   

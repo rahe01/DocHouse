@@ -25,6 +25,7 @@ const router = createBrowserRouter([
         element: <ServicesDetails></ServicesDetails>,
         loader: ({ params }) =>
           fetch(`${import.meta.env.VITE_API_URL}/services/${params.id}`),
+
       },
       {
         path: "/about",
@@ -45,19 +46,19 @@ const router = createBrowserRouter([
     element: <SignUp></SignUp>,
   },
   {
-    path: '/dashboard',
+    path: "/dashboard",
     element: <DashboardLayout></DashboardLayout>,
     children: [
       {
-        path: 'add-doctor',
-        element: <AddDoctor></AddDoctor>
+        path: "add-doctor",
+        element: <AddDoctor></AddDoctor>,
       },
       {
-        path: 'my-added-doctors',
-        element: <MyAddDoc></MyAddDoc>
-      }
-    ]
-  }
+        path: "my-added-doctors",
+        element: <MyAddDoc></MyAddDoc>,
+      },
+    ],
+  },
 ]);
 
 export default router;

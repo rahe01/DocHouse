@@ -1,12 +1,8 @@
-#app {
-    height: 100%;
-  }
- 
+
  
   
   .swiper {
     width: 100%;
-    height: 100%;
   }
   
   .swiper-slide {
@@ -25,5 +21,13 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+
+  .swiper-wrapper{
+    margin: 0 auto;
+    width: 100%;
+    height: 500px;
+    border-radius: 50px;
+    
   }
   
