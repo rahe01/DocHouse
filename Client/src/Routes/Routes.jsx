@@ -10,6 +10,7 @@ import Contact from "../Pages/Home/Contact/Contact";
 import DashboardLayout from "../Layout/DashboardLayout";
 import AddDoctor from "../Pages/Dashboard/Admin/AddDoctor";
 import MyAddDoc from "../Pages/Dashboard/Admin/MyAddDoc";
+import AllDoctors from "../Pages/Home/Doctor/AllDoctors";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
         path: "/contact",
         element: <Contact></Contact>,
       },
+      {
+        path: '/allDoctors',
+        element: <AllDoctors></AllDoctors>
+      }
     ],
   },
   {

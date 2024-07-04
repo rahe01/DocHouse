@@ -3,16 +3,19 @@ import { Button } from '@material-tailwind/react';
 import useAxiosCommon from '../../../../Hooks/useAxiosCommon';
 import UpdateDoctorModal from '../UpdateDoctorModal';
 
-const DoctorRow = ({ doctor, refetch, id }) => {
+const DoctorRow = ({ doctor, refetch }) => {
   const axios = useAxiosCommon();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleDelete = () => {
-    axios.delete(`/doctor/${id}`)
+  const handleDelete = (id) => {
+    axios.delete(`/doctorrr/${id}`)
       .then(res => {
         if (res.data.deletedCount > 0) {
           refetch();
-        }
+        } 
+      })
+      .catch(error => {
+        console.error('Error deleting doctor:', error);
       });
   };
 
@@ -42,7 +45,7 @@ const DoctorRow = ({ doctor, refetch, id }) => {
         </td>
         <td className="px-5 py-4 whitespace-nowrap text-sm text-gray-500">
           <Button onClick={handleUpdate} color="green">Update</Button>
-          <Button onClick={handleDelete} color="red">Delete</Button>
+          <Button onClick={() => handleDelete(doctor._id)} color="red">Delete</Button>
         </td>
       </tr>
       <UpdateDoctorModal

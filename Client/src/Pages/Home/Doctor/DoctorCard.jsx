@@ -3,9 +3,10 @@ import { FaCalendarPlus } from "react-icons/fa";
 import { AiFillDollarCircle } from "react-icons/ai";
 import Button from "../../../Components/Button/Button";
 
-const DoctorCard = () => {
+const DoctorCard = ({doctor}) => {
+  const {specialties} = doctor
   return (
-    <div>
+    <div >
       <div className="card w-96 glass">
         <figure>
           <img
@@ -15,7 +16,7 @@ const DoctorCard = () => {
         </figure>
         <div className="card-body">
           <h2 className="card-title font-bold">Karyen Anderson</h2>
-          <p>BTP - Senior Physiotherapist</p>
+          <p>{specialties}</p>
           <div className="rating border-b-2 pb-3 ">
             <input
               type="radio"

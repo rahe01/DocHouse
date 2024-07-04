@@ -1,193 +1,198 @@
-const express = require('express')
-const app = express()
-require('dotenv').config()
-const cors = require('cors')
-const cookieParser = require('cookie-parser')
-const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb')
-const jwt = require('jsonwebtoken')
+const express = require("express");
+const app = express();
+require("dotenv").config();
+const cors = require("cors");
+const cookieParser = require("cookie-parser");
+const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
+const jwt = require("jsonwebtoken");
 
-const port = process.env.PORT || 8000
+const port = process.env.PORT || 8000;
 
 // middleware
 const corsOptions = {
-  origin: ['http://localhost:5173', 'http://localhost:5174'],
+  origin: ["http://localhost:5173", "http://localhost:5174"],
   credentials: true,
   optionSuccessStatus: 200,
-}
-app.use(cors(corsOptions))
+};
+app.use(cors(corsOptions));
 
-app.use(express.json())
-app.use(cookieParser())
+app.use(express.json());
+app.use(cookieParser());
 
 // Verify Token Middleware
 const verifyToken = async (req, res, next) => {
-  const token = req.cookies?.token
-  console.log(token)
+  const token = req.cookies?.token;
+  console.log(token);
   if (!token) {
-    return res.status(401).send({ message: 'unauthorized access' })
+    return res.status(401).send({ message: "unauthorized access" });
   }
   jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
     if (err) {
-      console.log(err)
-      return res.status(401).send({ message: 'unauthorized access' })
+      console.log(err);
+      return res.status(401).send({ message: "unauthorized access" });
     }
-    req.user = decoded
-    next()
-  })
-}
+    req.user = decoded;
+    next();
+  });
+};
 
-const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.ncq0h0t.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.ncq0h0t.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 const client = new MongoClient(uri, {
   serverApi: {
     version: ServerApiVersion.v1,
     strict: true,
     deprecationErrors: true,
   },
-})
+});
 
 async function run() {
   try {
-
-    const userCollection = client.db('DocHouse').collection('users')
-    const serviceCollection = client.db('DocHouse').collection('services')
-    const doctorCollection = client.db('DocHouse').collection('doctors')
+    const userCollection = client.db("DocHouse").collection("users");
+    const serviceCollection = client.db("DocHouse").collection("services");
+    const doctorCollection = client.db("DocHouse").collection("doctors");
 
     // auth related api
-    app.post('/jwt', async (req, res) => {
-      const user = req.body
+    app.post("/jwt", async (req, res) => {
+      const user = req.body;
       const token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
-        expiresIn: '365d',
-      })
+        expiresIn: "365d",
+      });
       res
-        .cookie('token', token, {
+        .cookie("token", token, {
           httpOnly: true,
-          secure: process.env.NODE_ENV === 'production',
-          sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
+          secure: process.env.NODE_ENV === "production",
+          sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
         })
-        .send({ success: true })
-    })
+        .send({ success: true });
+    });
     // Logout
-    app.get('/logout', async (req, res) => {
+    app.get("/logout", async (req, res) => {
       try {
         res
-          .clearCookie('token', {
+          .clearCookie("token", {
             maxAge: 0,
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
+            secure: process.env.NODE_ENV === "production",
+            sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
           })
-          .send({ success: true })
-        console.log('Logout successful')
+          .send({ success: true });
+        console.log("Logout successful");
       } catch (err) {
-        res.status(500).send(err)
+        res.status(500).send(err);
       }
-    })
+    });
 
-
-      // *************** User related api***********************
+    // *************** User related api***********************
     // save user in db
-    app.put('/user', async (req, res) => {
+    app.put("/user", async (req, res) => {
       const user = req.body;
-    
+
       try {
         // Check if the email already exists in the database
-        const existingUser = await userCollection.findOne({ email: user.email });
-    
+        const existingUser = await userCollection.findOne({
+          email: user.email,
+        });
+
         if (existingUser) {
           // If the email exists, return a response indicating that the user already exists
-          return res.status(400).send({ message: 'Email already exists in the database' });
+          return res
+            .status(400)
+            .send({ message: "Email already exists in the database" });
         }
-    
+
         // If the email does not exist, insert the new user
         const result = await userCollection.insertOne(user);
         res.send(result);
       } catch (error) {
         // Handle any errors that occur during the database operation
-        res.status(500).send({ message: 'An error occurred', error });
+        res.status(500).send({ message: "An error occurred", error });
       }
     });
-    
 
-
-
-
-// *********************** Services related api********************
+    // *********************** Services related api********************
 
     // get services data
-    app.get('/services', async (req, res) => {
-      const cursor = serviceCollection.find({})
-      const result = await cursor.toArray()
-      res.send(result)
-    })
+    app.get("/services", async (req, res) => {
+      const cursor = serviceCollection.find({});
+      const result = await cursor.toArray();
+      res.send(result);
+    });
 
     // get single service
-    app.get('/services/:id', async (req, res) => {
-      const id = req.params.id
-      const query = { _id: new ObjectId(id) }
-      const result = await serviceCollection.findOne(query)
-      res.send(result)
-    })
-
-
+    app.get("/services/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await serviceCollection.findOne(query);
+      res.send(result);
+    });
 
     // ***********************Doctor Related api methods***********************
 
     // add doctor
-    app.post('/addDoctor' , async (req, res) => {
-      const doctor = req.body
-      const result = await doctorCollection.insertOne(doctor)
-      res.send(result)
-    })
+    app.post("/addDoctor", async (req, res) => {
+      const doctor = req.body;
+      const result = await doctorCollection.insertOne(doctor);
+      res.send(result);
+    });
 
     // get doctor by email
-    app.get('/doctor/:email', async (req, res) => {
+    app.get("/doctor/:email", async (req, res) => {
       const email = req.params.email;
       try {
         const query = { userEmail: email };
         const results = await doctorCollection.find(query).toArray();
         res.json(results);
       } catch (error) {
-        console.error('Error fetching data:', error);
-        res.status(500).json({ error: 'Failed to fetch doctors' });
+        console.error("Error fetching data:", error);
+        res.status(500).json({ error: "Failed to fetch doctors" });
       }
     });
 
     // doctor delete
-    app.delete('/doctor/:id', async (req, res) => {
-      const id = req.params.id
-      const query = { _id: new ObjectId(id) }
-      const result = await doctorCollection.deleteOne(query)
-      res.send(result)
-    })
-// Update doctor endpoint
-// Update doctor endpoint
-app.put('/updateDoctor/:id', async (req, res) => {
-  const id = req.params.id;
-  const updatedDoctor = req.body;
+    app.delete("/doctorrr/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await doctorCollection.deleteOne(query);
+      res.send(result);
+    });
+    // Update doctor endpoint
+    // Update doctor endpoint
+    app.put("/updateDoctor/:id", async (req, res) => {
+      const id = req.params.id;
+      const updatedDoctor = req.body;
 
-  // Ensure _id is not included in the update
-  delete updatedDoctor._id;
+      // Ensure _id is not included in the update
+      delete updatedDoctor._id;
 
-  try {
-    const query = { _id: new ObjectId(id) };
-    const result = await doctorCollection.updateOne(query, { $set: updatedDoctor });
+      try {
+        const query = { _id: new ObjectId(id) };
+        const result = await doctorCollection.updateOne(query, {
+          $set: updatedDoctor,
+        });
 
-    if (result.modifiedCount === 1) {
-      res.json({ message: 'Doctor updated successfully' });
-    } else {
-      res.status(404).json({ error: 'Doctor not found' });
-    }
-  } catch (err) {
-    console.error('Error updating doctor:', err);
-    res.status(500).json({ error: 'Failed to update doctor' });
-  }
-});
-
-
-  
-
+        if (result.modifiedCount === 1) {
+          res.json({ message: "Doctor updated successfully" });
+        } else {
+          res.status(404).json({ error: "Doctor not found" });
+        }
+      } catch (err) {
+        console.error("Error updating doctor:", err);
+        res.status(500).json({ error: "Failed to update doctor" });
+      }
+    });
 
 
 
+    // ***************get all dosctor **********************
+
+    app.get('/doctors', async (req, res) => {
+      try {
+          const data = await doctorCollection.find({}).toArray();
+          res.send(data);
+      } catch (err) {
+          console.error(err);
+          res.status(500).send('Error retrieving doctors data');
+      }
+  });
 
 
 
@@ -203,20 +208,20 @@ app.put('/updateDoctor/:id', async (req, res) => {
 
 
     // Send a ping to confirm a successful connection
-    await client.db('admin').command({ ping: 1 })
+    await client.db("admin").command({ ping: 1 });
     console.log(
-      'Pinged your deployment. You successfully connected to MongoDB!'
-    )
+      "Pinged your deployment. You successfully connected to MongoDB!"
+    );
   } finally {
     // Ensures that the client will close when you finish/error
   }
 }
-run().catch(console.dir)
+run().catch(console.dir);
 
-app.get('/', (req, res) => {
-  res.send('Hello from StayVista Server..')
-})
+app.get("/", (req, res) => {
+  res.send("Hello from StayVista Server..");
+});
 
 app.listen(port, () => {
-  console.log(`StayVista is running on port ${port}`)
-})
+  console.log(`StayVista is running on port ${port}`);
+});
