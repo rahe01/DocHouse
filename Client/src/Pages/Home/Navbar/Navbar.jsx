@@ -22,50 +22,54 @@ import {
 } from "@heroicons/react/24/solid";
 import { FaHome } from "react-icons/fa";
 import { FcCableRelease, FcCollaboration, FcContacts, FcAcceptDatabase } from "react-icons/fc";
-
-
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from './../../../Hooks/useAuth';
-
 
 // Profile menu items
 const profileMenuItems = [
   {
     label: "My Profile",
     icon: UserCircleIcon,
+    path: "/my-profile",
   },
   {
     label: "Edit Profile",
     icon: Cog6ToothIcon,
+    path: "/edit-profile",
   },
   {
     label: "Inbox",
     icon: InboxArrowDownIcon,
+    path: "/inbox",
   },
   {
     label: "Help",
     icon: LifebuoyIcon,
+    path: "/help",
   },
   {
-    label: "Dashboard",
+    label: "Admin Dashboard",
     icon: FcAcceptDatabase,
+    path: "/admin-dashboard",
+  },
+  {
+    label: "User Dashboard",
+    icon: FcAcceptDatabase,
+    path: "/dashboard",
   },
   {
     label: "Sign Out",
     icon: PowerIcon,
+    path: "/",
   },
 ];
 
 function ProfileMenu() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-
   const closeMenu = () => setIsMenuOpen(false);
-
   const navigate = useNavigate();
-
   const { logOut, user } = useAuth();
   console.log(user);
-
   const { email, displayName } = user || {};
   const photo = user?.reloadUserInfo?.photoUrl || "https://i.ibb.co/v3tRDh1/user.png";
 
@@ -100,27 +104,28 @@ function ProfileMenu() {
         </Button>
       </MenuHandler>
       <MenuList className="p-1">
-        {profileMenuItems.map(({ label, icon }, key) => {
+        {profileMenuItems.map(({ label, icon, path }, key) => {
           const isLastItem = key === profileMenuItems.length - 1;
           return (
-            <MenuItem
-              key={label}
-              onClick={() => {
-                closeMenu();
-                if (label === "Sign Out") handleLogout();
-              }}
-              className={`flex items-center gap-2 rounded ${
-                isLastItem ? "hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10" : ""
-              }`}
-            >
-              {React.createElement(icon, {
-                className: `h-4 w-4 ${isLastItem ? "text-red-500" : ""}`,
-                strokeWidth: 2,
-              })}
-              <Typography as="span" variant="small" className="font-normal" color={isLastItem ? "red" : "inherit"}>
-                {label}
-              </Typography>
-            </MenuItem>
+            <Link to={path} key={label}>
+              <MenuItem
+                onClick={() => {
+                  closeMenu();
+                  if (label === "Sign Out") handleLogout();
+                }}
+                className={`flex items-center gap-2 rounded ${
+                  isLastItem ? "hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10" : ""
+                }`}
+              >
+                {React.createElement(icon, {
+                  className: `h-4 w-4 ${isLastItem ? "text-red-500" : ""}`,
+                  strokeWidth: 2,
+                })}
+                <Typography as="span" variant="small" className="font-normal" color={isLastItem ? "red" : "inherit"}>
+                  {label}
+                </Typography>
+              </MenuItem>
+            </Link>
           );
         })}
       </MenuList>
@@ -133,39 +138,36 @@ const navListItems = [
   {
     label: "Home",
     icon: FaHome,
-    link : "/dashboard",
+    link: "/dashboard",
   },
   {
     label: "About",
     icon: FcCableRelease,
-    link : "/about",
+    link: "/about",
   },
   {
     label: "Appointment",
     icon: FcCollaboration,
-    link : "/appointment",
+    link: "/appointment",
   },
   {
     label: "Contact",
     icon: FcContacts,
-    link : "/contact",
+    link: "/contact",
   },
 ];
 
 function NavList() {
   return (
     <ul className="mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center">
-      {navListItems.map(({ label, icon , link}) => (
-       
-        <Typography key={label} as="a" href="#" variant="small" color="gray" className="font-medium text-blue-gray-500">
-          <Link to={link}>
-          <MenuItem className="flex items-center gap-2 lg:rounded-full">
-            {React.createElement(icon, { className: "h-[18px] w-[18px]" })} <span className="text-gray-900"> {label}</span>
-          </MenuItem>
-          </Link>
-        </Typography>
-        
-        
+      {navListItems.map(({ label, icon, link }) => (
+        <Link to={link} key={label}>
+          <Typography as="span" variant="small" color="gray" className="font-medium text-blue-gray-500">
+            <MenuItem className="flex items-center gap-2 lg:rounded-full">
+              {React.createElement(icon, { className: "h-[18px] w-[18px]" })} <span className="text-gray-900"> {label}</span>
+            </MenuItem>
+          </Typography>
+        </Link>
       ))}
     </ul>
   );
@@ -193,13 +195,14 @@ export function ComplexNavbar() {
         <div className="flex items-center gap-80">
           <Typography as="a" href="#" className="mr-4 ml-2 cursor-pointer py-1.5 font-medium">
             <Link to={"/"}>
-            <div className="flex items-center">
-              <img src='https://i.ibb.co/d2pvBM8/icon.png' className="w-12" alt="" />
-              <div className="ml-2 pt-1">
-                <span className="text-2xl text-purple-300 font-bold">Doc</span>
-                <span className="text-2xl text-blue-500 font-bold">House</span>
+              <div className="flex items-center">
+                <img src='https://i.ibb.co/d2pvBM8/icon.png' className="w-12" alt="" />
+                <div className="ml-2 pt-1">
+                  <span className="text-2xl text-purple-300 font-bold">Doc</span>
+                  <span className="text-2xl text-blue-500 font-bold">House</span>
+                </div>
               </div>
-            </div></Link>
+            </Link>
           </Typography>
           <div className="hidden lg:block">
             <NavList />
@@ -214,7 +217,7 @@ export function ComplexNavbar() {
             Signout
           </Button>
         ) : (
-          <Link to={"/singin"}>
+          <Link to={"/signin"}>
             <Button size="sm" variant="text">
               <span>Log In</span>
             </Button>

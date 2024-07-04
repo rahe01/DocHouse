@@ -108,6 +108,42 @@ async function run() {
       }
     });
 
+
+
+    // get all users 
+
+    app.get("/users", async (req, res) => {
+      const cursor = userCollection.find({});
+      const result = await cursor.toArray();
+      res.send(result);
+    });
+
+
+    // update user role 
+    app.patch("/users/:id", async (req, res) => {
+
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const updateDoc = { $set: { role: req.body.role } };
+      const result = await userCollection.updateOne(query, updateDoc);
+      res.send(result);
+    })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     // *********************** Services related api********************
 
     // get services data
@@ -154,7 +190,7 @@ async function run() {
       const result = await doctorCollection.deleteOne(query);
       res.send(result);
     });
-    // Update doctor endpoint
+
     // Update doctor endpoint
     app.put("/updateDoctor/:id", async (req, res) => {
       const id = req.params.id;
@@ -180,32 +216,26 @@ async function run() {
       }
     });
 
+    // get all doctors
 
-
-    // ***************get all dosctor **********************
-
-    app.get('/doctors', async (req, res) => {
+    app.get("/doctors", async (req, res) => {
       try {
-          const data = await doctorCollection.find({}).toArray();
-          res.send(data);
+        const data = await doctorCollection.find({}).toArray();
+        res.send(data);
       } catch (err) {
-          console.error(err);
-          res.status(500).send('Error retrieving doctors data');
+        console.error(err);
+        res.status(500).send("Error retrieving doctors data");
       }
-  });
+    });
 
+    // get doctor by id
 
-
-
-
-
-
-
-
-
-
-
-
+    app.get("/doctorssss/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await doctorCollection.findOne(query);
+      res.send(result);
+    });
 
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });

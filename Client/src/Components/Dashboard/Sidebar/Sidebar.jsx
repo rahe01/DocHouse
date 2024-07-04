@@ -2,7 +2,7 @@ import { useState } from "react";
 import { GrLogout } from "react-icons/gr";
 import { AiOutlineBars } from "react-icons/ai";
 import { FaChartPie } from "react-icons/fa";
-import { MdDashboard, MdPersonAdd, MdAssignmentInd } from "react-icons/md"; // Add icons for new menu items
+import {  MdPersonAdd, MdAssignmentInd, MdEvent } from "react-icons/md"; // Add icons for new menu items
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../../Hooks/useAuth";
 import MenuItem from "./MenuItem";
@@ -83,11 +83,7 @@ const Sidebar = () => {
           <div className="flex flex-col justify-between flex-1 mt-6">
             <nav>
               {/* Dashboard */}
-              <MenuItem
-                label="Dashboard"
-                address="/dashboard"
-                icon={<MdDashboard className="text-blue-500" />}
-              />
+             
               {/* Statistics */}
               <MenuItem
                 label="Statistics"
@@ -105,6 +101,18 @@ const Sidebar = () => {
                 label="My Added Doctors"
                 address="my-added-doctors"
                 icon={<MdAssignmentInd className="text-orange-500" />}
+              />
+              {/* Manage Users */}
+              <MenuItem
+                label="Manage Users"
+                address="users"
+                icon={<MdAssignmentInd className="text-red-500" />}
+              />
+              {/* All Appointments */}
+              <MenuItem
+                label="All Appointments"
+                address="all-appointments"
+                icon={<MdEvent className="text-yellow-500" />}
               />
             </nav>
           </div>

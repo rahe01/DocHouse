@@ -30,13 +30,11 @@ const Doctor = () => {
 
   return (
     <div>
-      <h1 className="text-4xl font-bold text-center">Our Expert Doctors</h1>
-      <p className="text-center font-medium text-xl p-5">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste voluptates
-        asperiores aut ab mollitia similique ducimus cumque laboriosam totam
-        illo sequi nihil error tenetur in maxime, culpa temporibus molestiae
-        eaque.
-      </p>
+ <h1 className="text-4xl font-bold text-center">Our Expert Doctors</h1>
+<p className="text-center font-medium text-xl p-5">
+  Our team of expert doctors is dedicated to providing top-notch medical care and personalized treatment. With a wealth of experience and specialized skills, they are committed to ensuring your health and well-being. Trust our professionals to support you with the highest standards of medical excellence.
+</p>
+
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {doctors

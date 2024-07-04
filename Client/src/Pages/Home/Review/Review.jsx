@@ -1,99 +1,107 @@
-// Import Swiper React components
-import { Swiper, SwiperSlide } from "swiper/react";
-
-// Import Swiper styles
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
-
-import "./review.css";
-import review from "../../../../public/review.json";
-
-// Import required modules
-import { Parallax, Pagination, Navigation } from "swiper/modules";
-
 import { useState, useEffect } from "react";
-import { FaStar } from "react-icons/fa";
 
-export default function Review() {
-  const [reviews, setReviews] = useState([]);
+const testimonials = [
+  {
+    title: "Expertise and Compassion Combined",
+    text: "I can't thank enough for their exceptional care. The doctors and staff showed incredible expertise and compassion throughout my treatment journey. I felt truly cared for every step of the way.",
+    name: "Sarah D",
+    occupation: "IT Professional",
+    image: "https://i.ibb.co/k44nGbT/Ellipse-10.png",
+    rating: "https://i.ibb.co/p3hLCwM/Frame-10.png",
+  },
+  {
+    title: "Life-Saving Care, Life-Changing Experience",
+    text: "My experience at [Healthcare Provider Name] was life-changing. The prompt and accurate diagnosis, coupled with the advanced treatments they provided, saved my life.",
+    name: "Michael R ",
+    occupation: "Business Executive",
+    image: "https://i.ibb.co/FDdpCvR/Ellipse-10-1.png",
+    rating: "https://i.ibb.co/gjCGF3Y/Frame-10-1.png",
+  },
+  {
+    title: "A Partner in Health and Wellness",
+    text: "As a busy professional, I appreciate the convenience and quality of care I receive at [Healthcare Provider Name]. From telemedicine consultations to routine check-ups, they've become my trusted partner in health and wellness.",
+    name: "David S",
+    occupation: "Lawyer",
+    image: "https://i.ibb.co/pbkfwkv/Ellipse-10-2.png",
+    rating: "https://i.ibb.co/p3hLCwM/Frame-10.png",
+  },
+  // Add more testimonials as needed
+];
+
+const Review = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
-    // Fetch review data (in a real-world scenario, you might fetch this data from an API)
-    setReviews(review);
-  }, []);
+    let slideInterval;
+
+    if (!isHovered) {
+      slideInterval = setInterval(() => {
+        setCurrentSlide((prev) =>
+          prev === testimonials.length - 1 ? 0 : prev + 1
+        );
+      }, 3000); // Change slide every 3 seconds
+    }
+
+    return () => clearInterval(slideInterval);
+  }, [isHovered]);
 
   return (
-    <div className="my-5 md:my-10">
-       <h1 className="text-4xl font-bold text-center my-2 mt-3 md:text-4xl">
-        What Our Patients Say
+    <div
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className="relative space-y-4 my-20 px-4 md:px-0"
+    >
+      <button className="btn rounded-3xl border btn-ghost border-black text-lg">
+        Testimonial
+      </button>
+      <h1 className="text-4xl font-semibold text-center">
+        What they say about us
       </h1>
-
-      <div className="p-2 md:p-4">
-        <p className="text-sm leading-relaxed mb-4 sm:text-xl text-center">
-          Our patients rave about our exceptional dental care. From personalized
-          treatments to a comforting environment, we prioritize your oral health
-          and satisfaction.
-        </p>
-      </div>
-      <Swiper
-        speed={600}
-        parallax={true}
-        pagination={{
-          clickable: true,
-        }}
-        navigation={true}
-        modules={[Parallax, Pagination, Navigation]}
-        slidesPerView={1} // Default to 1 slide
-        spaceBetween={30} // Add space between slides
-        breakpoints={{
-          768: {
-            slidesPerView: 2,
-            spaceBetween: 30,
-          },
-        }}
-        className="mySwiper swiper-review"
-      >
+      <div className="relative overflow-hidden">
         <div
-          slot="container-start"
-          className="parallax-bg"
+          className="flex transition-transform duration-300"
           style={{
-            backgroundImage:
-              "url(https://i.ibb.co/TLsrSc5/pexels-padrinan-806427.jpg)",
+            transform: `translateX(-${(currentSlide * 100) / testimonials.length}%)`,
           }}
-          data-swiper-parallax="-23%"
-        ></div>
-
-        {reviews.map((review, index) => (
-          <SwiperSlide key={index}>
-            <div className="flex items-center justify-between p-8 bg-white rounded-lg shadow-md">
-              <div className="flex flex-col w-2/3">
-                <div
-                  className="text-xl text-start font-bold mb-2"
-                  data-swiper-parallax="-300"
-                >
-                  {review.name}
-                </div>
-                <div className="text-start mb-4" data-swiper-parallax="-100">
-                  <p>{review.review}</p>
-                </div>
-                <div className="flex">
-                  {[...Array(5)].map((star, i) => (
-                    <FaStar key={i} className="text-yellow-500" />
-                  ))}
-                </div>
-              </div>
-              <div className="w-1/3 flex justify-center">
+        >
+          {testimonials.map((testimonial, index) => (
+            <div
+              key={index}
+              className="h-auto bg-[#FFFFF5] rounded-3xl flex-shrink-0 w-full md:w-1/3 p-5 m-2"
+            >
+              <h1 className="font-semibold text-xl">{testimonial.title}</h1>
+              <p>{testimonial.text}</p>
+              <div className="flex items-center gap-4 mt-4">
                 <img
-                  src={review.image}
-                  alt={review.name}
-                  className="w-24 h-24 rounded-full object-cover"
+                  src={testimonial.image}
+                  alt={testimonial.name}
+                  className="w-12 h-12 rounded-full"
                 />
+                <div>
+                  <p>
+                    <strong>{testimonial.name},</strong> {testimonial.occupation}
+                  </p>
+                  <img src={testimonial.rating} alt="rating" className="mt-1" />
+                </div>
               </div>
             </div>
-          </SwiperSlide>
+          ))}
+        </div>
+      </div>
+      <div className="flex justify-center mt-4">
+        {testimonials.map((_, index) => (
+          <button
+            key={index}
+            className={`w-2 h-2 rounded-full mx-1 ${
+              currentSlide === index ? "bg-[#FFC637]" : "bg-gray-300"
+            }`}
+            onClick={() => setCurrentSlide(index)}
+          />
         ))}
-      </Swiper>
+      </div>
     </div>
   );
-}
+};
+
+export default Review;

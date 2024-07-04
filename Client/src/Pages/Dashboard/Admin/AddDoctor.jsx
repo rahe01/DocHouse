@@ -6,13 +6,13 @@ import { Input, Select, Option } from "@material-tailwind/react";
 import {
   FaUserMd, FaPhone, FaMapMarkerAlt, FaGraduationCap, FaLanguage,
   FaAward, FaBook, FaBriefcase, FaUniversity, FaConciergeBell,
-   FaDollarSign, FaStethoscope, FaLinkedin, FaFacebook,
+  FaDollarSign, FaStethoscope, FaLinkedin, FaFacebook,
   FaTwitter
 } from "react-icons/fa";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 const AddDoctor = () => {
-  const { user } = useAuth();    
+  const { user } = useAuth();
   const navigate = useNavigate();
   const axiosSecure = useAxiosSecure();
 
@@ -42,11 +42,11 @@ const AddDoctor = () => {
       facebook: "",
       twitter: "",
     },
+    amount: "", // Added amount field
     userEmail: user?.email || "",
     userName: user?.displayName || "",
     userPicture: user?.photoURL || "",
   });
-  console.log(doctor);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -76,19 +76,15 @@ const AddDoctor = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
-    // doctor add in db
-    axiosSecure.post('/addDoctor' , doctor)
-    .then(data => {
-      console.log(data.data);
-      toast.success('Doctor added successfully')
-      navigate('/dashboard/my-added-doctors')
-    })
-    .catch(err => console.log(err))
 
-  
-
-
+    // Add doctor to the database
+    axiosSecure.post('/addDoctor', doctor)
+      .then(data => {
+        console.log(data.data);
+        toast.success('Doctor added successfully');
+        navigate('/dashboard/my-added-doctors');
+      })
+      .catch(err => console.log(err));
   };
 
   return (
@@ -258,9 +254,16 @@ const AddDoctor = () => {
           />
         </div>
         <div className="mb-4">
-          <label className="block text-gray-700 font-bold mb-2" htmlFor="specialties">
-            Specialties
-          </label>
+          <Input
+            label="Amount"
+            icon={<FaDollarSign />}
+            name="amount"
+            value={doctor.amount}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="mb-4">
+          
           <Select
             label="Select Specialty"
             name="specialties"
@@ -337,7 +340,7 @@ const AddDoctor = () => {
         <div className="col-span-1 md:col-span-2">
           <button
             type="submit"
-           className="btn btn-outline w-full border-[#F7A582] hover:border-[#F7A582] hover:bg-[rgb(247,165,130)] text-md text-[#F7A582] font-bold"
+            className="btn btn-outline w-full border-[#F7A582] hover:border-[#F7A582] hover:bg-[rgb(247,165,130)] text-md text-[#F7A582] font-bold"
           >
             Add Doctor
           </button>

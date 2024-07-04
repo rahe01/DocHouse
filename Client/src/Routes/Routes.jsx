@@ -11,6 +11,8 @@ import DashboardLayout from "../Layout/DashboardLayout";
 import AddDoctor from "../Pages/Dashboard/Admin/AddDoctor";
 import MyAddDoc from "../Pages/Dashboard/Admin/MyAddDoc";
 import AllDoctors from "../Pages/Home/Doctor/AllDoctors";
+import DocDetails from "../Pages/Home/Doctor/DocDetails";
+import Users from "../Pages/Dashboard/Admin/Users/Users";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +41,12 @@ const router = createBrowserRouter([
       {
         path: '/allDoctors',
         element: <AllDoctors></AllDoctors>
+      },
+      {
+        path: '/doctor/:id',
+        element: <DocDetails></DocDetails>,
+        loader: ({ params }) =>
+          fetch(`${import.meta.env.VITE_API_URL}/doctorssss/${params.id}`),
       }
     ],
   },
@@ -62,6 +70,11 @@ const router = createBrowserRouter([
         path: "my-added-doctors",
         element: <MyAddDoc></MyAddDoc>,
       },
+      {
+        path: 'users',
+        element: <Users></Users>,
+        
+      }
     ],
   },
 ]);
