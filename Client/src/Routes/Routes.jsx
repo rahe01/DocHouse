@@ -13,6 +13,7 @@ import MyAddDoc from "../Pages/Dashboard/Admin/MyAddDoc";
 import AllDoctors from "../Pages/Home/Doctor/AllDoctors";
 import DocDetails from "../Pages/Home/Doctor/DocDetails";
 import Users from "../Pages/Dashboard/Admin/Users/Users";
+import Apoinment from "../Pages/Apoinment/Apoinment";
 
 const router = createBrowserRouter([
   {
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
         element: <DocDetails></DocDetails>,
         loader: ({ params }) =>
           fetch(`${import.meta.env.VITE_API_URL}/doctorssss/${params.id}`),
+      },
+      {
+        path: '/appointment',
+        element: <Apoinment></Apoinment>
       }
     ],
   },

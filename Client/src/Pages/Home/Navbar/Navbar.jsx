@@ -138,7 +138,7 @@ const navListItems = [
   {
     label: "Home",
     icon: FaHome,
-    link: "/dashboard",
+    link: "/",
   },
   {
     label: "About",
