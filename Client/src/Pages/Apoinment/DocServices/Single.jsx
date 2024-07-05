@@ -1,7 +1,7 @@
 // Single.js
-const Single = ({ image, name, bgColor }) => {
+const Single = ({ image, name, bgColor , onClick}) => {
     return (
-      <div className={`flex gap-4 items-center p-4 rounded-lg shadow-md`} style={{ backgroundColor: bgColor }}>
+      <div className={`flex gap-4 items-center p-4 rounded-lg shadow-md cursor-pointer`}  onClick={onClick} style={{ backgroundColor: bgColor }}>
         <img
           src={image}
           alt={name}

@@ -50,6 +50,7 @@ async function run() {
     const userCollection = client.db("DocHouse").collection("users");
     const serviceCollection = client.db("DocHouse").collection("services");
     const doctorCollection = client.db("DocHouse").collection("doctors");
+    const appoinmentService = client.db("DocHouse").collection("appoService");
 
     // auth related api
     app.post("/jwt", async (req, res) => {
@@ -160,6 +161,28 @@ async function run() {
       const result = await serviceCollection.findOne(query);
       res.send(result);
     });
+
+    // ************************apoinment service api*********************
+
+  
+    // get all apinment service
+
+    app.get('/appoService', async (req, res) => {
+      try {
+        const cursor = appoinmentService.find({});
+        const result = await cursor.toArray();
+        res.send(result);
+      } catch (error) {
+        console.error('Error fetching services:', error);
+        res.status(500).send({ error: 'Failed to fetch services' });
+      }
+    });
+  
+   
+  
+
+
+
 
     // ***********************Doctor Related api methods***********************
 
