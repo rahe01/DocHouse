@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import Single from './Single';
 import useAxiosCommon from '../../../Hooks/useAxiosCommon';
+import LoadingSpinner from '../../../Components/LoadingSpinner/LoadingSpinner';
+import Appo from '../SingleServices/Appo';
 
 const DocServices = () => {
   // Get today's date
@@ -45,11 +47,11 @@ const DocServices = () => {
   return (
     <div className="container mx-auto p-4">
       <div className="text-center">
-        <p className="text-gray-500">On: {formattedDate}</p>
+        <p className="text-gray-500">On {formattedDate}</p>
         <h1 className="text-3xl font-semibold mt-4 mb-8">Please select a service.</h1>
       </div>
       
-      {loading && <p>Loading...</p>}
+      {loading && <LoadingSpinner></LoadingSpinner>}
       {error && <p className="text-red-500">{error}</p>}
       
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
@@ -66,11 +68,7 @@ const DocServices = () => {
 
       {/* Conditionally render the selected service details */}
       {selectedService && (
-        <div className="mt-8 p-4 border-t border-gray-200">
-          <h2 className="text-2xl font-bold">{selectedService.name}</h2>
-          <img src={selectedService.image} alt={selectedService.name} className="w-full h-auto mt-4" />
-          {/* Add any other details you want to display here */}
-        </div>
+      <Appo service={selectedService}></Appo>
       )}
     </div>
   );

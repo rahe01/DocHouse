@@ -51,6 +51,7 @@ async function run() {
     const serviceCollection = client.db("DocHouse").collection("services");
     const doctorCollection = client.db("DocHouse").collection("doctors");
     const appoinmentService = client.db("DocHouse").collection("appoService");
+    const userAppoinment = client.db("DocHouse").collection("userAppoinment");
 
     // auth related api
     app.post("/jwt", async (req, res) => {
@@ -177,6 +178,63 @@ async function run() {
         res.status(500).send({ error: 'Failed to fetch services' });
       }
     });
+
+
+    app.post('/addApoinment', async (req, res) => {
+      const apoinment = req.body;
+      const result = await userAppoinment.insertOne(apoinment);
+      res.send(result);
+    });
+
+    // get all apoinment 
+    app.get('/userAppoinment', async (req, res) => {
+      try {
+        const cursor = userAppoinment.find({});
+        const result = await cursor.toArray();
+        res.send(result);
+      } catch (error) {
+        console.error('Error fetching apinment:', error);
+        res.status(500).send({ error: 'Failed to fetch apinment' });
+      }
+    });
+
+    // get appointment by email
+    app.get("/userAppoinment/:email", async (req, res) => {
+      const email = req.params.email;
+      try {
+        const query = { userEmail: email };
+        const results = await userAppoinment.find(query).toArray();
+        res.json(results);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        res.status(500).json({ error: "Failed to fetch apoinment" });
+      }
+    });
+
+
+    // delet aponement
+
+    app.delete("/userAppoinment/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await userAppoinment.deleteOne(query);
+      res.send(result);
+    });
+
+
+    // get appoinment by email
+    app.get("/personalAppoinment/:email", async (req, res) => {
+      const email = req.params.email;
+      try {
+        const query = { userEmail: email };
+        const results = await userAppoinment.find(query).toArray();
+        res.json(results);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        res.status(500).json({ error: "Failed to fetch apoinment services" });
+      }
+    });
+    
   
    
   

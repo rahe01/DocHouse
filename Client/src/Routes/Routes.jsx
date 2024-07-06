@@ -14,6 +14,8 @@ import AllDoctors from "../Pages/Home/Doctor/AllDoctors";
 import DocDetails from "../Pages/Home/Doctor/DocDetails";
 import Users from "../Pages/Dashboard/Admin/Users/Users";
 import Apoinment from "../Pages/Apoinment/Apoinment";
+import AllApo from "../Pages/Dashboard/Admin/AllAppionment/AllApo";
+import MyAppo from "../Pages/Dashboard/User/MyAppoinment/MyAppo";
 
 const router = createBrowserRouter([
   {
@@ -79,6 +81,14 @@ const router = createBrowserRouter([
         path: 'users',
         element: <Users></Users>,
         
+      },
+      {
+        path: 'allapplications',
+        element: <AllApo></AllApo>
+      },
+      {
+        path: 'my-appointments',
+        element: <MyAppo></MyAppo>
       }
     ],
   },

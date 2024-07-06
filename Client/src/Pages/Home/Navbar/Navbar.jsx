@@ -217,7 +217,7 @@ export function ComplexNavbar() {
             Signout
           </Button>
         ) : (
-          <Link to={"/signin"}>
+          <Link to={"/singin"}>
             <Button size="sm" variant="text">
               <span>Log In</span>
             </Button>

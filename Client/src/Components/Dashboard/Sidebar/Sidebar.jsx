@@ -111,8 +111,15 @@ const Sidebar = () => {
               {/* All Appointments */}
               <MenuItem
                 label="All Appointments"
-                address="all-appointments"
+                address="allapplications"
                 icon={<MdEvent className="text-yellow-500" />}
+              />
+              <h1 className="text-xl font-bold mb-4">User Menu</h1>
+              <MenuItem
+                label="My Appointments"
+                address="my-appointments"
+                icon={<MdEvent className="text-blue-500" />
+}
               />
             </nav>
           </div>
