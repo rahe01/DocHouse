@@ -30,7 +30,7 @@ const profileMenuItems = [
   {
     label: "My Profile",
     icon: UserCircleIcon,
-    path: "/my-profile",
+    path: "/dashboard/profile",
   },
   {
     label: "Edit Profile",

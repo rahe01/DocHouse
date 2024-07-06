@@ -6,11 +6,12 @@ const MyAppo = () => {
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
     const [appointments, setAppointments] = useState([]);
+    
 
     useEffect(() => {
         const fetchAppointments = async () => {
             try {
-                const response = await axiosSecure.get(`/personalAppoinment${user.email}`);
+                const response = await axiosSecure.get(`/personalAppoinment/${user.email}`);
                 setAppointments(response.data);
             } catch (error) {
                 console.error('Error fetching appointments:', error);
@@ -24,7 +25,7 @@ const MyAppo = () => {
 
     const handleCancel = async (appointmentId) => {
         try {
-            const response = await axiosSecure.delete(`/appointments/${appointmentId}`);
+            const response = await axiosSecure.delete(`/userAppoinment/${appointmentId}`);
             if (response.status === 200) {
                 setAppointments(prev => prev.filter(appointment => appointment._id !== appointmentId));
             } else {

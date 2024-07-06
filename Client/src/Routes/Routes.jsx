@@ -16,6 +16,7 @@ import Users from "../Pages/Dashboard/Admin/Users/Users";
 import Apoinment from "../Pages/Apoinment/Apoinment";
 import AllApo from "../Pages/Dashboard/Admin/AllAppionment/AllApo";
 import MyAppo from "../Pages/Dashboard/User/MyAppoinment/MyAppo";
+import Profile from "../Pages/Dashboard/User/Profile/Profile";
 
 const router = createBrowserRouter([
   {
@@ -89,6 +90,10 @@ const router = createBrowserRouter([
       {
         path: 'my-appointments',
         element: <MyAppo></MyAppo>
+      },
+      {
+        path: 'profile',
+        element : <Profile></Profile>
       }
     ],
   },
