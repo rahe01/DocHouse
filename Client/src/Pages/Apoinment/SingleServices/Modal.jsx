@@ -7,6 +7,7 @@ import { Fragment, useState } from 'react';
 import useAuth from './../../../Hooks/useAuth';
 import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 import { toast } from 'react-toastify';
+import { useNavigate,  } from 'react-router-dom';
 
 const Modal = ({ closeModal, isOpen, service }) => {
   const { amount, time, name: serviceName } = service;
@@ -15,6 +16,7 @@ const Modal = ({ closeModal, isOpen, service }) => {
   const [fromemail, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const {user} = useAuth();
+  const navigation = useNavigate();
 
   // Log the entire auth object to understand its structure
   console.log(user);
@@ -38,6 +40,7 @@ const {displayName, email} = user || {};
       await axiosSecure.post('/addApoinment', appointmentData);
       toast.success('Appointment booked successfully!')
       closeModal();
+      navigation('/dashboard/my-appointments');
 
     } catch (error) {
       console.error(error);
@@ -103,6 +106,7 @@ const {displayName, email} = user || {};
                     <label className='block text-sm font-medium text-gray-700'>Name</label>
                     <input
                       type='text'
+                      required
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       className='mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm'
@@ -112,6 +116,7 @@ const {displayName, email} = user || {};
                     <label className='block text-sm font-medium text-gray-700'>Email</label>
                     <input
                       type='email'
+                      required
                       value={fromemail}
                       onChange={(e) => setEmail(e.target.value)}
                       className='mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm'
@@ -122,6 +127,7 @@ const {displayName, email} = user || {};
                     <input
                       type='tel'
                       value={phone}
+                      required
                       onChange={(e) => setPhone(e.target.value)}
                       className='mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm'
                     />
