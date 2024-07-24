@@ -289,7 +289,7 @@ const AddDoctor = () => {
             id="bio"
             value={doctor.bio}
             onChange={handleChange}
-            className="w-full px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 textarea textarea-primary"
+            className="w-full px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:to-black border-gray-500 textarea textarea-primary"
           ></textarea>
         </div>
         <div className="mb-4 col-span-1 md:col-span-2">
@@ -301,7 +301,7 @@ const AddDoctor = () => {
             id="reviews"
             value={doctor.reviews}
             onChange={handleChange}
-            className="w-full px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 textarea textarea-primary"
+            className="w-full px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 border-gray-500 textarea textarea-primary"
           ></textarea>
         </div>
         <div className="mb-4">

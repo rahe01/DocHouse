@@ -170,7 +170,7 @@ const UpdateDoctorForm = ({ handleSubmit, doctor, handleChange, loading, handleI
       <div className="col-span-2">
         <button
           type="submit"
-          className={`w-full px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+          className={`btn btn-outline w-full border-[#F7A582] hover:border-[#F7A582] hover:bg-[rgb(247,165,130)] text-md text-[#F7A582] font-bold' : ''}`}
           disabled={loading}
         >
           {loading ? 'Updating...' : 'Update Doctor'}
