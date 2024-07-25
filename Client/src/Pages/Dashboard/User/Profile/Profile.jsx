@@ -1,4 +1,3 @@
-import { Helmet } from 'react-helmet-async';
 import useAuth from '../../../../Hooks/useAuth';
 import useRole from '../../../../Hooks/useRole';
 import LoadingSpinner from '../../../../Components/LoadingSpinner/LoadingSpinner';
@@ -6,53 +5,52 @@ import LoadingSpinner from '../../../../Components/LoadingSpinner/LoadingSpinner
 const Profile = () => {
   const { user, loading } = useAuth();
   const [role, isLoading] = useRole();
+  console.log(user, role)
+  console.log(role)
 
   if (isLoading || loading) return <LoadingSpinner />;
 
   return (
-    <div className='flex justify-center items-center h-screen'>
-      <Helmet>
-        <title>Profile</title>
-      </Helmet>
-      <div className='bg-white shadow-lg rounded-2xl w-3/5'>
+    <div className='flex justify-center items-center '>
+      <div className='bg-white shadow-xl rounded-3xl w-3/5 overflow-hidden'>
         <img
-          alt='profile'
-          src='https://wallpapercave.com/wp/wp10784415.jpg'
-          className='w-full mb-4 rounded-t-lg h-36'
+          alt='profile background'
+          src='https://i.ibb.co/1rdSF8m/pexels-fr3nks-305565.jpg'
+          className='w-full h-48 object-cover'
         />
-        <div className='flex flex-col items-center justify-center p-4 -mt-16'>
+        <div className='flex flex-col items-center p-6 -mt-16'>
           <a href='#' className='relative block'>
             <img
               alt='profile'
               src={user?.photoURL}
-              className='mx-auto object-cover rounded-full h-24 w-24 border-2 border-white'
+              className='mx-auto object-cover rounded-full h-24 w-24 border-4 border-white shadow-md'
             />
           </a>
 
-          <p className='p-2 px-4 text-xs text-white bg-pink-500 rounded-full'>
+          <p className='p-2 px-4 mt-4 text-xs bg-purple-200 text-purple-800 rounded-full'>
             {role.toUpperCase()}
           </p>
-          <p className='mt-2 text-xl font-medium text-gray-800'>
+          <p className='mt-2 text-2xl font-semibold text-gray-800'>
             User Id: {user?.uid}
           </p>
-          <div className='w-full p-2 mt-4 rounded-lg'>
-            <div className='flex flex-wrap items-center justify-between text-sm text-gray-600'>
-              <p className='flex flex-col'>
+          <div className='w-full mt-6'>
+            <div className='flex flex-col items-center text-sm text-gray-700'>
+              <p className='flex flex-col items-center'>
                 Name
-                <span className='font-bold text-black'>
+                <span className='font-bold text-gray-900'>
                   {user?.displayName}
                 </span>
               </p>
-              <p className='flex flex-col'>
+              <p className='flex flex-col items-center mt-4'>
                 Email
-                <span className='font-bold text-black'>{user?.email}</span>
+                <span className='font-bold text-gray-900'>{user?.email}</span>
               </p>
 
-              <div>
-                <button className='bg-[#F43F5E] px-10 py-1 rounded-lg text-white cursor-pointer hover:bg-[#af4053] block mb-1'>
+              <div className='mt-6 flex space-x-4'>
+                <button className='px-6 py-2 bg-indigo-500 text-white rounded-full shadow hover:bg-indigo-600 transition duration-300'>
                   Update Profile
                 </button>
-                <button className='bg-[#F43F5E] px-7 py-1 rounded-lg text-white cursor-pointer hover:bg-[#af4053]'>
+                <button className='px-6 py-2 bg-purple-500 text-white rounded-full shadow hover:bg-purple-600 transition duration-300'>
                   Change Password
                 </button>
               </div>

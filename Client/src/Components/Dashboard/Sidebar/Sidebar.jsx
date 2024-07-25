@@ -2,14 +2,14 @@ import { useState } from "react";
 import { GrLogout } from "react-icons/gr";
 import { AiOutlineBars } from "react-icons/ai";
 import { FaChartPie } from "react-icons/fa";
-import {  MdPersonAdd, MdAssignmentInd, MdEvent } from "react-icons/md"; // Add icons for new menu items
+import { MdPersonAdd, MdAssignmentInd, MdEvent, MdSettings, MdAccountCircle, MdBook, MdDashboard } from "react-icons/md"; // Add icons for new menu items
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../../Hooks/useAuth";
 import MenuItem from "./MenuItem";
 import { toast } from "react-toastify";
 
 const Sidebar = () => {
-  const { logOut } = useAuth();
+  const { logOut, } = useAuth();
   const [isActive, setActive] = useState(false);
   const navigate = useNavigate();
   const handleLogout = () => {
@@ -82,45 +82,69 @@ const Sidebar = () => {
           {/* Nav Items */}
           <div className="flex flex-col justify-between flex-1 mt-6">
             <nav>
-              {/* Dashboard */}
+              {/* Common Routes */}
+              <MenuItem
+                label="Dashboard"
+                address="/dashboard"
+                icon={<MdDashboard className="text-blue-500" />}
+              />
+              
+              {/* Admin Routes */}
+          
+                <>
+                  <MenuItem
+                    label="Statistics"
+                    address="/dashboard/statistics"
+                    icon={<FaChartPie className="text-green-500" />}
+                  />
+                  <MenuItem
+                    label="Add Doctor"
+                    address="/dashboard/add-doctor"
+                    icon={<MdPersonAdd className="text-purple-500" />}
+                  />
+                  <MenuItem
+                    label="My Added Doctors"
+                    address="/dashboard/my-added-doctors"
+                    icon={<MdAssignmentInd className="text-orange-500" />}
+                  />
+                  <MenuItem
+                    label="Manage Users"
+                    address="/dashboard/users"
+                    icon={<MdAssignmentInd className="text-red-500" />}
+                  />
+                  <MenuItem
+                    label="All Appointments"
+                    address="/dashboard/all-appointments"
+                    icon={<MdEvent className="text-yellow-500" />}
+                  />
+                </>
+         
+              
+              {/* User Routes */}
              
-              {/* Statistics */}
-              <MenuItem
-                label="Statistics"
-                address="/dashboard/statistics"
-                icon={<FaChartPie className="text-green-500" />}
-              />
-              {/* Add Doctor */}
-              <MenuItem
-                label="Add Doctor"
-                address="add-doctor"
-                icon={<MdPersonAdd className="text-purple-500" />}
-              />
-              {/* My Added Doctors */}
-              <MenuItem
-                label="My Added Doctors"
-                address="my-added-doctors"
-                icon={<MdAssignmentInd className="text-orange-500" />}
-              />
-              {/* Manage Users */}
-              <MenuItem
-                label="Manage Users"
-                address="users"
-                icon={<MdAssignmentInd className="text-red-500" />}
-              />
-              {/* All Appointments */}
-              <MenuItem
-                label="All Appointments"
-                address="allapplications"
-                icon={<MdEvent className="text-yellow-500" />}
-              />
-              <h1 className="text-xl font-bold mb-4">User Menu</h1>
-              <MenuItem
-                label="My Appointments"
-                address="my-appointments"
-                icon={<MdEvent className="text-blue-500" />
-}
-              />
+                <>
+                  <MenuItem
+                    label="My Appointments"
+                    address="/dashboard/my-appointments"
+                    icon={<MdEvent className="text-blue-500" />}
+                  />
+                  <MenuItem
+                    label="Book Appointment"
+                    address="/dashboard/appointment"
+                    icon={<MdBook className="text-green-500" />}
+                  />
+                  <MenuItem
+                    label="Profile"
+                    address="/dashboard/profile"
+                    icon={<MdAccountCircle className="text-orange-500" />}
+                  />
+                  <MenuItem
+                    label="Settings"
+                    address="/dashboard/settings"
+                    icon={<MdSettings className="text-red-500" />}
+                  />
+                </>
+           
             </nav>
           </div>
         </div>

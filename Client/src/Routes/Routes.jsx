@@ -84,7 +84,7 @@ const router = createBrowserRouter([
         
       },
       {
-        path: 'allapplications',
+        path: 'all-appointments',
         element: <AllApo></AllApo>
       },
       {
@@ -94,6 +94,10 @@ const router = createBrowserRouter([
       {
         path: 'profile',
         element : <Profile></Profile>
+      },
+      {
+        path: 'appointment',
+        element: <Apoinment></Apoinment>
       }
     ],
   },

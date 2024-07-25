@@ -13,4 +13,7 @@ body{
 
 /* Add these styles to your CSS file */
 
-  
+  .doc-color {
+    background-color: #f59870;
+    color: white;
+  }
