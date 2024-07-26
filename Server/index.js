@@ -6,7 +6,7 @@ const cookieParser = require("cookie-parser");
 const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const jwt = require("jsonwebtoken");
 const axios = require("axios");
-const qs = require('qs');
+const qs = require("qs");
 
 const port = process.env.PORT || 8000;
 
@@ -55,6 +55,7 @@ async function run() {
     const doctorCollection = client.db("DocHouse").collection("doctors");
     const appoinmentService = client.db("DocHouse").collection("appoService");
     const userAppoinment = client.db("DocHouse").collection("userAppoinment");
+    const payment = client.db("DocHouse").collection("payment");
 
     // auth related api
     app.post("/jwt", async (req, res) => {
@@ -86,6 +87,121 @@ async function run() {
       }
     });
 
+
+        // **************payment **********************
+
+        app.post("/create-payment", async (req, res) => {
+          const paymentInfo = req.body;
+          const trxId = new ObjectId().toString()
+    
+          const initiateData = {
+            store_id: "abc66a2852452ff1",
+            store_passwd: "abc66a2852452ff1@ssl",
+            total_amount: paymentInfo.amount,
+            currency: "USD",
+            tran_id: trxId,
+            success_url: "http://localhost:8000/success-payment",
+            fail_url: "http://localhost:8000/fail",
+            cancel_url: "http://localhost:8000/cancel",
+            cus_name: "Customer Name",
+            cus_email: "cust@yahoo.com",
+            cus_add1: "Dhaka",
+            cus_add2: "Dhaka",
+            cus_city: "Dhaka",
+            cus_state: "Dhaka",
+            cus_postcode: "1000",
+            cus_country: "Bangladesh",
+            cus_phone: "01711111111",
+            cus_fax: "01711111111",
+            shipping_method: "NO",
+            ship_name: "Customer Name",
+            ship_add1: "Dhaka",
+            ship_add2: "Dhaka",
+            ship_city: "Dhaka",
+            ship_state: "Dhaka",
+            ship_postcode: "1000",
+            ship_country: "Bangladesh",
+            multi_card_name: "mastercard,visacard,amexcard",
+            value_a: "ref001_A",
+            value_b: "ref002_B",
+            value_c: "ref003_C",
+            value_d: "ref004_D",
+            product_name: "dkfsdf",
+            product_category: "Electronics",
+            product_profile: "Electronics",
+          };
+    
+          const response = await axios({
+            method: "POST",
+            url: "https://sandbox.sslcommerz.com/gwprocess/v4/api.php",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            data: qs.stringify(initiateData),
+          });
+
+
+          const saveData = {
+            userId: paymentInfo.userId,
+            paymentId: trxId,
+            amount: paymentInfo.amount,
+            status: "Pending",
+            cus_name : paymentInfo.name
+           
+          }
+
+          const save = await payment.insertOne(saveData)
+
+          if(save){
+            res.send({
+              paymentUrl: response.data.GatewayPageURL,
+            });
+          }
+    
+         
+    
+        
+        });
+
+        app.post('/fail' ,async (req, res) => {
+          res.redirect('http://localhost:5173/dashboard/fail')
+        })
+        app.post('/cancel' ,async (req, res) => {
+          res.redirect('http://localhost:5173/dashboard/cancel')
+        })
+    
+        // success payment
+    
+        app.post("/success-payment", async (req, res) => {
+          const successInfo = req.body;
+
+          if(successInfo.status !== 'VALID'){
+            return res.status(400).send({ message: "Invalid payment status" });
+          }
+
+          // update payment information
+
+          const query = {
+            paymentId: successInfo.tran_id,
+          }
+          const update = {
+            $set: {
+              status: "Success",
+            },
+          };
+
+          const result = await payment.updateOne(query, update);
+
+
+          res.redirect('http://localhost:5173/dashboard/success')
+      
+
+
+
+
+
+          console.log(successInfo);
+        });
+    
+
     // *************** User related api***********************
     // save user in db
     app.put("/user", async (req, res) => {
@@ -113,9 +229,7 @@ async function run() {
       }
     });
 
-
-
-    // get all users 
+    // get all users
 
     app.get("/users", async (req, res) => {
       const cursor = userCollection.find({});
@@ -123,111 +237,23 @@ async function run() {
       res.send(result);
     });
 
-
-    // update user role 
+    // update user role
     app.patch("/users/:id", async (req, res) => {
-
       const id = req.params.id;
       const query = { _id: new ObjectId(id) };
       const updateDoc = { $set: { role: req.body.role } };
       const result = await userCollection.updateOne(query, updateDoc);
       res.send(result);
-    })
+    });
 
-    // get user by email 
+    // get user by email
 
-    app.get('/user/:email', async (req, res)=>{
+    app.get("/user/:email", async (req, res) => {
       const email = req.params.email;
-      const query ={ email: email };
-      const user = await userCollection.findOne(query)
+      const query = { email: email };
+      const user = await userCollection.findOne(query);
       res.send(user);
-    })
-
-
-
-    // **************payment **********************
-
-    app.post('/create-payment' , async (req, res)=>{
-      const paymentInfo = req.body;
-
-      const initiateData = {
-        store_id: "abc66a2852452ff1",
-        store_passwd: "abc66a2852452ff1@ssl",
-        total_amount: paymentInfo.amount,
-        currency: "USD",
-        tran_id: "REF123",
-        success_url: "http://localhost:8000/success-payment",
-        fail_url: "http://yoursite.com/fail.php",
-        cancel_url: "http://yoursite.com/cancel.php",
-        cus_name: "Customer Name",
-        cus_email: "cust@yahoo.com",
-        cus_add1: "Dhaka",
-        cus_add2: "Dhaka",
-        cus_city: "Dhaka",
-        cus_state: "Dhaka",
-        cus_postcode: "1000",
-        cus_country: "Bangladesh",
-        cus_phone: "01711111111",
-        cus_fax: "01711111111",
-        shipping_method: "NO",
-        ship_name: "Customer Name",
-        ship_add1: "Dhaka",
-        ship_add2: "Dhaka",
-        ship_city: "Dhaka",
-        ship_state: "Dhaka",
-        ship_postcode: "1000",
-        ship_country: "Bangladesh",
-        multi_card_name: "mastercard,visacard,amexcard",
-        value_a: "ref001_A",
-        value_b: "ref002_B",
-        value_c: "ref003_C",
-        value_d: "ref004_D",
-        product_name : "dkfsdf",
-        product_category: "Electronics",
-        product_profile : "Electronics",
-
-      };
-
-      const response = await axios({
-        
-        method: 'POST',
-        url: 'https://sandbox.sslcommerz.com/gwprocess/v4/api.php',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        data: qs.stringify(initiateData)
-         
-      })
-      
-console.log(response.data.GatewayPageURL)
-
-
-      res.send({
-        paymentUrl : response.data.GatewayPageURL
-      }  )
-
-    })
-
-
-
-    // success payment
-
-    app.post('/success-payment', async (req, res)=>{
-      const successInfo = req.body()
-      console.table(successInfo)
-
-    })
-
-
-
-
-
-
-
-
-
-
-
-
-
+    });
 
 
     // *********************** Services related api********************
@@ -249,36 +275,34 @@ console.log(response.data.GatewayPageURL)
 
     // ************************apoinment service api*********************
 
-  
     // get all apinment service
 
-    app.get('/appoService', async (req, res) => {
+    app.get("/appoService", async (req, res) => {
       try {
         const cursor = appoinmentService.find({});
         const result = await cursor.toArray();
         res.send(result);
       } catch (error) {
-        console.error('Error fetching services:', error);
-        res.status(500).send({ error: 'Failed to fetch services' });
+        console.error("Error fetching services:", error);
+        res.status(500).send({ error: "Failed to fetch services" });
       }
     });
 
-
-    app.post('/addApoinment', async (req, res) => {
+    app.post("/addApoinment", async (req, res) => {
       const apoinment = req.body;
       const result = await userAppoinment.insertOne(apoinment);
       res.send(result);
     });
 
-    // get all apoinment 
-    app.get('/userAppoinment', async (req, res) => {
+    // get all apoinment
+    app.get("/userAppoinment", async (req, res) => {
       try {
         const cursor = userAppoinment.find({});
         const result = await cursor.toArray();
         res.send(result);
       } catch (error) {
-        console.error('Error fetching apinment:', error);
-        res.status(500).send({ error: 'Failed to fetch apinment' });
+        console.error("Error fetching apinment:", error);
+        res.status(500).send({ error: "Failed to fetch apinment" });
       }
     });
 
@@ -295,7 +319,6 @@ console.log(response.data.GatewayPageURL)
       }
     });
 
-
     // delet aponement
 
     app.delete("/userAppoinment/:id", async (req, res) => {
@@ -304,7 +327,6 @@ console.log(response.data.GatewayPageURL)
       const result = await userAppoinment.deleteOne(query);
       res.send(result);
     });
-
 
     // get appoinment by email
     app.get("/personalAppoinment/:email", async (req, res) => {
@@ -318,13 +340,6 @@ console.log(response.data.GatewayPageURL)
         res.status(500).json({ error: "Failed to fetch apoinment services" });
       }
     });
-    
-  
-   
-  
-
-
-
 
     // ***********************Doctor Related api methods***********************
 

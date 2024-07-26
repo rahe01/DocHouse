@@ -62,6 +62,13 @@ const MyAppo = () => {
                     time
                 });
                 toast.success('Payment created successfully');
+                console.log(response)
+                const redirectUrl = response.data.paymentUrl
+                
+                if(redirectUrl){
+                    window.location.replace(redirectUrl)
+                }
+
             } catch (error) {
                 console.error('Error creating payment:', error);
                 toast.error('Error creating payment');

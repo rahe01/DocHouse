@@ -17,6 +17,9 @@ import Apoinment from "../Pages/Apoinment/Apoinment";
 import AllApo from "../Pages/Dashboard/Admin/AllAppionment/AllApo";
 import MyAppo from "../Pages/Dashboard/User/MyAppoinment/MyAppo";
 import Profile from "../Pages/Dashboard/User/Profile/Profile";
+import Success from "../Pages/Dashboard/Admin/Users/Pay/Success";
+import Cancel from "../Pages/Dashboard/Admin/Users/Pay/Cancel";
+import Fail from "../Pages/Dashboard/Admin/Users/Pay/Fail";
 
 const router = createBrowserRouter([
   {
@@ -98,6 +101,18 @@ const router = createBrowserRouter([
       {
         path: 'appointment',
         element: <Apoinment></Apoinment>
+      },
+      {
+        path: 'success',
+        element : <Success></Success>
+      },
+      {
+        path: 'cancel' ,
+        element : <Cancel></Cancel>
+      },
+      {
+        path: 'fail',
+        element: <Fail></Fail>
       }
     ],
   },
