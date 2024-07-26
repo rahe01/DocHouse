@@ -5,6 +5,8 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const jwt = require("jsonwebtoken");
+const axios = require("axios");
+const qs = require('qs');
 
 const port = process.env.PORT || 8000;
 
@@ -17,6 +19,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 app.use(express.json());
+app.use(express.urlencoded());
 app.use(cookieParser());
 
 // Verify Token Middleware
@@ -140,6 +143,78 @@ async function run() {
       res.send(user);
     })
 
+
+
+    // **************payment **********************
+
+    app.post('/create-payment' , async (req, res)=>{
+      const paymentInfo = req.body;
+
+      const initiateData = {
+        store_id: "abc66a2852452ff1",
+        store_passwd: "abc66a2852452ff1@ssl",
+        total_amount: paymentInfo.amount,
+        currency: "USD",
+        tran_id: "REF123",
+        success_url: "http://localhost:8000/success-payment",
+        fail_url: "http://yoursite.com/fail.php",
+        cancel_url: "http://yoursite.com/cancel.php",
+        cus_name: "Customer Name",
+        cus_email: "cust@yahoo.com",
+        cus_add1: "Dhaka",
+        cus_add2: "Dhaka",
+        cus_city: "Dhaka",
+        cus_state: "Dhaka",
+        cus_postcode: "1000",
+        cus_country: "Bangladesh",
+        cus_phone: "01711111111",
+        cus_fax: "01711111111",
+        shipping_method: "NO",
+        ship_name: "Customer Name",
+        ship_add1: "Dhaka",
+        ship_add2: "Dhaka",
+        ship_city: "Dhaka",
+        ship_state: "Dhaka",
+        ship_postcode: "1000",
+        ship_country: "Bangladesh",
+        multi_card_name: "mastercard,visacard,amexcard",
+        value_a: "ref001_A",
+        value_b: "ref002_B",
+        value_c: "ref003_C",
+        value_d: "ref004_D",
+        product_name : "dkfsdf",
+        product_category: "Electronics",
+        product_profile : "Electronics",
+
+      };
+
+      const response = await axios({
+        
+        method: 'POST',
+        url: 'https://sandbox.sslcommerz.com/gwprocess/v4/api.php',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        data: qs.stringify(initiateData)
+         
+      })
+      
+console.log(response.data.GatewayPageURL)
+
+
+      res.send({
+        paymentUrl : response.data.GatewayPageURL
+      }  )
+
+    })
+
+
+
+    // success payment
+
+    app.post('/success-payment', async (req, res)=>{
+      const successInfo = req.body()
+      console.table(successInfo)
+
+    })
 
 
 

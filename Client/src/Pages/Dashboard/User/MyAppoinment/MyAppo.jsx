@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import useAuth from '../../../../Hooks/useAuth';
 import useAxiosSecure from '../../../../Hooks/useAxiosSecure';
+import { toast } from 'react-toastify';
 
 const MyAppo = () => {
     const { user } = useAuth();
@@ -43,9 +44,33 @@ const MyAppo = () => {
             console.error('Error cancelling appointment:', error);
         }
     };
+    const handleCreatePayment = async (appointmentId) => {
+        // Find the appointment with the given ID
+        const appointment = appointments.find(app => app._id === appointmentId);
 
-    const handlePay = (appointmentId) => {
-        // Add your payment logic here
+        if (appointment) {
+            const { name, fromemail, amount, serviceName , time} = appointment;
+            const amountInt = parseInt(amount.replace('$', ''));
+
+            try {
+                const response = await axiosSecure.post('/create-payment', {
+                    name,
+                    email: user?.email, // Current user's email
+                    amount : amountInt,
+                    fromemail,
+                    serviceName,
+                    time
+                });
+                toast.success('Payment created successfully');
+            } catch (error) {
+                console.error('Error creating payment:', error);
+                toast.error('Error creating payment');
+            }
+        } else {
+            console.error('Appointment not found');
+            toast.error('Appointment not found');
+        }
+        
         console.log('Pay for appointment', appointmentId);
     };
 
@@ -78,7 +103,7 @@ const MyAppo = () => {
                                 <td className="py-2 px-4">{appointment.amount}</td>
                                 <td className="py-2 px-4">
                                     <button
-                                        onClick={() => handlePay(appointment._id)}
+                                        onClick={() => handleCreatePayment(appointment._id)}
                                         className="bg-green-500 text-white px-4 py-1 rounded hover:bg-green-700 mr-2"
                                     >
                                         Pay
