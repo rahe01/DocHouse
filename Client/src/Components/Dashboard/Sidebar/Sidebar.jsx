@@ -2,7 +2,7 @@ import { useState } from "react";
 import { GrLogout } from "react-icons/gr";
 import { AiOutlineBars } from "react-icons/ai";
 import { FaChartPie } from "react-icons/fa";
-import { MdPersonAdd, MdAssignmentInd, MdEvent, MdSettings, MdAccountCircle, MdBook, MdDashboard } from "react-icons/md"; // Add icons for new menu items
+import { MdPersonAdd, MdAssignmentInd, MdEvent, MdAccountCircle, MdBook, MdDashboard } from "react-icons/md"; // Add icons for new menu items
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../../Hooks/useAuth";
 import MenuItem from "./MenuItem";
@@ -90,6 +90,7 @@ const Sidebar = () => {
               />
               
               {/* Admin Routes */}
+              <h1 className="text-xl font-bold text-center my-5">Admin Routes</h1>
           
                 <>
                   <MenuItem
@@ -113,20 +114,31 @@ const Sidebar = () => {
                     icon={<MdAssignmentInd className="text-red-500" />}
                   />
                   <MenuItem
-                    label="All Appointments"
+                    label="All Pending Appointments"
                     address="/dashboard/all-appointments"
                     icon={<MdEvent className="text-yellow-500" />}
+                  />
+                  <MenuItem
+                    label="All Success Appointments"
+                    address="/dashboard/successApoAdmin"
+                    icon={<MdEvent className="text-deep-purple-500" />}
                   />
                 </>
          
               
               {/* User Routes */}
+              <h1 className="text-xl font-bold text-center my-5">User Routes</h1>
              
                 <>
                   <MenuItem
-                    label="My Appointments"
+                    label="Pending Appointment"
                     address="/dashboard/my-appointments"
                     icon={<MdEvent className="text-blue-500" />}
+                  />
+                  <MenuItem
+                    label="Success Appointment"
+                    address="/dashboard/aposeccessbyuser"
+                    icon={<MdEvent className="text-pink-500" />}
                   />
                   <MenuItem
                     label="Book Appointment"
@@ -138,11 +150,7 @@ const Sidebar = () => {
                     address="/dashboard/profile"
                     icon={<MdAccountCircle className="text-orange-500" />}
                   />
-                  <MenuItem
-                    label="Settings"
-                    address="/dashboard/settings"
-                    icon={<MdSettings className="text-red-500" />}
-                  />
+               
                 </>
            
             </nav>

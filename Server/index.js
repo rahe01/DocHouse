@@ -87,120 +87,138 @@ async function run() {
       }
     });
 
+    // **************payment **********************
 
-        // **************payment **********************
+    app.post("/create-payment", async (req, res) => {
+      const paymentInfo = req.body;
+      const trxId = new ObjectId().toString();
+      console.log(paymentInfo)
 
-        app.post("/create-payment", async (req, res) => {
-          const paymentInfo = req.body;
-          const trxId = new ObjectId().toString()
-    
-          const initiateData = {
-            store_id: "abc66a2852452ff1",
-            store_passwd: "abc66a2852452ff1@ssl",
-            total_amount: paymentInfo.amount,
-            currency: "USD",
-            tran_id: trxId,
-            success_url: "http://localhost:8000/success-payment",
-            fail_url: "http://localhost:8000/fail",
-            cancel_url: "http://localhost:8000/cancel",
-            cus_name: "Customer Name",
-            cus_email: "cust@yahoo.com",
-            cus_add1: "Dhaka",
-            cus_add2: "Dhaka",
-            cus_city: "Dhaka",
-            cus_state: "Dhaka",
-            cus_postcode: "1000",
-            cus_country: "Bangladesh",
-            cus_phone: "01711111111",
-            cus_fax: "01711111111",
-            shipping_method: "NO",
-            ship_name: "Customer Name",
-            ship_add1: "Dhaka",
-            ship_add2: "Dhaka",
-            ship_city: "Dhaka",
-            ship_state: "Dhaka",
-            ship_postcode: "1000",
-            ship_country: "Bangladesh",
-            multi_card_name: "mastercard,visacard,amexcard",
-            value_a: "ref001_A",
-            value_b: "ref002_B",
-            value_c: "ref003_C",
-            value_d: "ref004_D",
-            product_name: "dkfsdf",
-            product_category: "Electronics",
-            product_profile: "Electronics",
-          };
-    
-          const response = await axios({
-            method: "POST",
-            url: "https://sandbox.sslcommerz.com/gwprocess/v4/api.php",
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            data: qs.stringify(initiateData),
-          });
+      const initiateData = {
+        store_id: "abc66a2852452ff1",
+        store_passwd: "abc66a2852452ff1@ssl",
+        total_amount: paymentInfo.amount,
+        currency: "USD",
+        tran_id: trxId,
+        success_url: "http://localhost:8000/success-payment",
+        fail_url: "http://localhost:8000/fail",
+        cancel_url: "http://localhost:8000/cancel",
+        cus_name: "Customer Name",
+        cus_email:paymentInfo.email,
+        cus_add1: "Dhaka",
+        cus_add2: "Dhaka",
+        cus_city: "Dhaka",
+        cus_state: "Dhaka",
+        cus_postcode: "1000",
+        cus_country: "Bangladesh",
+        cus_phone: "01711111111",
+        cus_fax: "01711111111",
+        shipping_method: "NO",
+        ship_name: "Customer Name",
+        ship_add1: "Dhaka",
+        ship_add2: "Dhaka",
+        ship_city: "Dhaka",
+        ship_state: "Dhaka",
+        ship_postcode: "1000",
+        ship_country: "Bangladesh",
+        multi_card_name: "mastercard,visacard,amexcard",
+        value_a: "ref001_A",
+        value_b: "ref002_B",
+        value_c: "ref003_C",
+        value_d: "ref004_D",
+        product_name: paymentInfo.serviceName,
+        product_category: "Electronics",
+        product_profile: "Electronics",
+      };
 
+      const response = await axios({
+        method: "POST",
+        url: "https://sandbox.sslcommerz.com/gwprocess/v4/api.php",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        data: qs.stringify(initiateData),
+      });
 
-          const saveData = {
-            userId: paymentInfo.userId,
-            paymentId: trxId,
-            amount: paymentInfo.amount,
-            status: "Pending",
-            cus_name : paymentInfo.name
-           
-          }
+      const saveData = {
+        userId: paymentInfo.userId,
+        paymentId: trxId,
+        amount: paymentInfo.amount,
+        status: "Pending",
+        cus_name: paymentInfo.name,
+        cus_email: paymentInfo.email
+      };
 
-          const save = await payment.insertOne(saveData)
+      const save = await payment.insertOne(saveData);
 
-          if(save){
-            res.send({
-              paymentUrl: response.data.GatewayPageURL,
-            });
-          }
-    
-         
-    
-        
+      if (save) {
+        res.send({
+          paymentUrl: response.data.GatewayPageURL,
         });
+      }
+    });
 
-        app.post('/fail' ,async (req, res) => {
-          res.redirect('http://localhost:5173/dashboard/fail')
-        })
-        app.post('/cancel' ,async (req, res) => {
-          res.redirect('http://localhost:5173/dashboard/cancel')
-        })
-    
-        // success payment
-    
-        app.post("/success-payment", async (req, res) => {
-          const successInfo = req.body;
+    app.post("/fail", async (req, res) => {
+      res.redirect("http://localhost:5173/dashboard/fail");
+    });
+    app.post("/cancel", async (req, res) => {
+      res.redirect("http://localhost:5173/dashboard/cancel");
+    });
 
-          if(successInfo.status !== 'VALID'){
-            return res.status(400).send({ message: "Invalid payment status" });
-          }
+    // success payment
 
-          // update payment information
+    app.post("/success-payment", async (req, res) => {
+      const successInfo = req.body;
 
-          const query = {
-            paymentId: successInfo.tran_id,
-          }
-          const update = {
-            $set: {
-              status: "Success",
-            },
-          };
+      if (successInfo.status !== "VALID") {
+        return res.status(400).send({ message: "Invalid payment status" });
+      }
 
-          const result = await payment.updateOne(query, update);
+      // update payment information
+
+      const query = {
+        paymentId: successInfo.tran_id,
+      };
+      const update = {
+        $set: {
+          status: "Success",
+        },
+      };
+
+      // userappointments delet
+      await userAppoinment.deleteOne({ userId: successInfo.product_name });
+
+      const result = await payment.updateOne(query, update);
+
+      res.redirect("http://localhost:5173/dashboard/success");
+
+      console.log(successInfo);
+    });
+
+    // get payment all payments
+
+    app.get("/paymentInfo", async (req, res) => {
+     
+      const payments = await payment.find({}).toArray();
+      res.send(payments);
+
+    });
+
+    // get payment info by email address
+    app.get("/paymentInfoByEmail/:email", async (req, res) => {
+      const email = req.params.email; // Use req.params to get URL parameters
+      try {
+          const payments = await payment.find({ cus_email: email }).toArray();
+          res.send(payments);
+      } catch (err) {
+          console.error('Error fetching payment info:', err);
+          res.status(500).send('Internal Server Error');
+      }
+  });
+  
+
+  
 
 
-          res.redirect('http://localhost:5173/dashboard/success')
-      
 
-
-
-
-
-          console.log(successInfo);
-        });
-    
 
     // *************** User related api***********************
     // save user in db
@@ -254,7 +272,6 @@ async function run() {
       const user = await userCollection.findOne(query);
       res.send(user);
     });
-
 
     // *********************** Services related api********************
 

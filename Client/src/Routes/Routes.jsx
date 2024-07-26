@@ -20,6 +20,8 @@ import Profile from "../Pages/Dashboard/User/Profile/Profile";
 import Success from "../Pages/Dashboard/Admin/Users/Pay/Success";
 import Cancel from "../Pages/Dashboard/Admin/Users/Pay/Cancel";
 import Fail from "../Pages/Dashboard/Admin/Users/Pay/Fail";
+import SuccessApo from "../Pages/Dashboard/Admin/AllAppionment/SuccessApo";
+import SuccessApoUser from "../Pages/Dashboard/Admin/Users/SuccessApoUser";
 
 const router = createBrowserRouter([
   {
@@ -35,7 +37,6 @@ const router = createBrowserRouter([
         element: <ServicesDetails></ServicesDetails>,
         loader: ({ params }) =>
           fetch(`${import.meta.env.VITE_API_URL}/services/${params.id}`),
-
       },
       {
         path: "/about",
@@ -46,19 +47,19 @@ const router = createBrowserRouter([
         element: <Contact></Contact>,
       },
       {
-        path: '/allDoctors',
-        element: <AllDoctors></AllDoctors>
+        path: "/allDoctors",
+        element: <AllDoctors></AllDoctors>,
       },
       {
-        path: '/doctor/:id',
+        path: "/doctor/:id",
         element: <DocDetails></DocDetails>,
         loader: ({ params }) =>
           fetch(`${import.meta.env.VITE_API_URL}/doctorssss/${params.id}`),
       },
       {
-        path: '/appointment',
-        element: <Apoinment></Apoinment>
-      }
+        path: "/appointment",
+        element: <Apoinment></Apoinment>,
+      },
     ],
   },
   {
@@ -82,37 +83,44 @@ const router = createBrowserRouter([
         element: <MyAddDoc></MyAddDoc>,
       },
       {
-        path: 'users',
+        path: "users",
         element: <Users></Users>,
-        
       },
       {
-        path: 'all-appointments',
-        element: <AllApo></AllApo>
+        path: "all-appointments",
+        element: <AllApo></AllApo>,
       },
       {
-        path: 'my-appointments',
-        element: <MyAppo></MyAppo>
+        path: "my-appointments",
+        element: <MyAppo></MyAppo>,
       },
       {
-        path: 'profile',
-        element : <Profile></Profile>
+        path: "profile",
+        element: <Profile></Profile>,
       },
       {
-        path: 'appointment',
-        element: <Apoinment></Apoinment>
+        path: "appointment",
+        element: <Apoinment></Apoinment>,
       },
       {
-        path: 'success',
-        element : <Success></Success>
+        path: "successApoAdmin",
+        element: <SuccessApo></SuccessApo>,
       },
       {
-        path: 'cancel' ,
-        element : <Cancel></Cancel>
+        path: "success",
+        element: <Success></Success>,
       },
       {
-        path: 'fail',
-        element: <Fail></Fail>
+        path: "cancel",
+        element: <Cancel></Cancel>,
+      },
+      {
+        path: "fail",
+        element: <Fail></Fail>,
+      },
+      {
+        path: 'aposeccessbyuser',
+        element: <SuccessApoUser></SuccessApoUser>
       }
     ],
   },

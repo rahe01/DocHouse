@@ -45,7 +45,7 @@ const AllApo = () => {
 
     return (
         <div className="p-4">
-            <h2 className="text-xl font-bold mb-4">All Appointments</h2>
+            <h2 className="text-xl font-bold mb-4">All Pending Appointments</h2>
             {appointments.length === 0 ? (
                 <p>No appointments found.</p>
             ) : (
