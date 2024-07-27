@@ -144,7 +144,8 @@ async function run() {
         amount: paymentInfo.amount,
         status: "Pending",
         cus_name: paymentInfo.name,
-        cus_email: paymentInfo.email
+        cus_email: paymentInfo.email,
+        date : paymentInfo.date
       };
 
       const save = await payment.insertOne(saveData);

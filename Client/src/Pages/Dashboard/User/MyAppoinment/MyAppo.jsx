@@ -65,6 +65,19 @@ const MyAppo = () => {
     }
   };
 
+  function getFormattedDate() {
+    const date = new Date();
+    const day = date.getDate();
+    const month = date.getMonth() + 1; // Months are zero-based, so we add 1
+    const year = date.getFullYear();
+  
+    return `${day}/${month}/${year}`;
+  }
+  
+  const formattedDate = getFormattedDate();
+  console.log(formattedDate); // Example output: 27/7/2024
+  
+
   const handleCreatePayment = async (appointmentId) => {
     const appointment = appointments.find((app) => app._id === appointmentId);
 
@@ -80,6 +93,7 @@ const MyAppo = () => {
           fromemail,
           serviceName,
           time,
+          date: formattedDate
         });
         toast.success("Payment created successfully");
         console.log(response);
