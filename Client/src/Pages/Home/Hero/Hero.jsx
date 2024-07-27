@@ -36,15 +36,15 @@ export default function Hero() {
                   Get Started
                 </button>
               </div>
-              <div className="flex gap-2 w-full sm:w-3/4 md:w-1/2">
-                <div className="w-1/2">
+              <div className="  flex gap-2 w-full sm:w-3/4 md:w-1/2">
+                <div className="hidden md:block  w-1/2">
                   <img
                     src="https://i.ibb.co/jG3S53L/pexels-iamluisao-12917374.jpg"
                     alt="Doctor"
                     className="w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 object-cover rounded-3xl border-4 border-white shadow-lg"
                   />
                 </div>
-                <div className="w-1/2">
+                <div className="hidden md:block  w-1/2">
                   <img
                     src="https://i.ibb.co/PD4MTkk/pexels-cedric-fauntleroy-4269355.jpg"
                     alt="Doctor"
@@ -72,14 +72,14 @@ export default function Hero() {
                 </button>
               </div>
               <div className="flex gap-2 w-full sm:w-3/4 md:w-1/2">
-                <div className="w-1/2">
+              <div className="hidden md:block  w-1/2">
                   <img
                     src="https://i.ibb.co/HDc6Pq6/pexels-cedric-fauntleroy-4270362.jpg"
                     alt="Doctor"
                     className="w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 object-cover rounded-3xl border-4 border-white shadow-lg"
                   />
                 </div>
-                <div className="w-1/2">
+                <div className="hidden md:block  w-1/2">
                   <img
                     src="https://i.ibb.co/2YpDbNs/pexels-shvetsa-3845736.jpg"
                     alt="Doctor"

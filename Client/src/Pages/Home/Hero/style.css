@@ -1,33 +1,63 @@
+/* General Swiper Styles */
+.swiper {
+  width: 100%;
+}
 
- 
-  
-  .swiper {
-    width: 100%;
+/* Swiper Slide Styles */
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+
+  /* Center slide text vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Swiper Slide Image Styles */
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px; /* Adding some border-radius for better appearance */
+}
+
+/* Swiper Wrapper Styles */
+.swiper-wrapper {
+  margin: 0 auto;
+  width: 100%;
+  height: 500px;
+  border-radius: 50px;
+}
+
+/* Responsive Styles */
+@media (max-width: 1200px) {
+  .swiper-wrapper {
+    height: 450px;
   }
-  
+}
+
+@media (max-width: 992px) {
+  .swiper-wrapper {
+    height: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  .swiper-wrapper {
+    height: 350px;
+  }
+}
+
+@media (max-width: 576px) {
+  .swiper-wrapper {
+    height: 300px;
+    border-radius: 20px; /* Adjusting border-radius for smaller screens */
+  }
+
   .swiper-slide {
-    text-align: center;
-    font-size: 18px;
-    background: #fff;
-  
-    /* Center slide text vertically */
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    font-size: 16px; /* Adjusting font-size for smaller screens */
   }
-  
-  .swiper-slide img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .swiper-wrapper{
-    margin: 0 auto;
-    width: 100%;
-    height: 500px;
-    border-radius: 50px;
-    
-  }
-  
+}
