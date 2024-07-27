@@ -22,6 +22,7 @@ import Cancel from "../Pages/Dashboard/Admin/Users/Pay/Cancel";
 import Fail from "../Pages/Dashboard/Admin/Users/Pay/Fail";
 import SuccessApo from "../Pages/Dashboard/Admin/AllAppionment/SuccessApo";
 import SuccessApoUser from "../Pages/Dashboard/Admin/Users/SuccessApoUser";
+import Statistict from "../Pages/Dashboard/Admin/Statistict/Statistict";
 
 const router = createBrowserRouter([
   {
@@ -121,6 +122,10 @@ const router = createBrowserRouter([
       {
         path: 'aposeccessbyuser',
         element: <SuccessApoUser></SuccessApoUser>
+      },
+      {
+        path: 'statistict',
+        element: <Statistict></Statistict>
       }
     ],
   },

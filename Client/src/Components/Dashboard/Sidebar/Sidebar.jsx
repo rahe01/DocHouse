@@ -95,7 +95,7 @@ const Sidebar = () => {
                 <>
                   <MenuItem
                     label="Statistics"
-                    address="/dashboard/statistics"
+                    address="/dashboard/statistict"
                     icon={<FaChartPie className="text-green-500" />}
                   />
                   <MenuItem

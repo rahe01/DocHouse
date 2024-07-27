@@ -9,24 +9,22 @@ const SuccessApoUser = () => {
     const { user } = useAuth();
 
     useEffect(() => {
-      
-            axiosSecure.get(`/paymentInfoByEmail/${user?.email}`)
-                .then(res => {
-                    console.log('Response data:', res.data);
-                    // Ensure the data is an array
-                    if (Array.isArray(res.data)) {
-                        setPayInfo(res.data);
-                    } else {
-                        setPayInfo([]);
-                    }
-                    setLoading(false);
-                })
-                .catch(err => {
-                    console.error('Error fetching payment info:', err);
-                    setPayInfo([]);  // Set to empty array in case of error
-                    setLoading(false);
-                });
-     
+        axiosSecure.get(`/paymentInfoByEmail/${user?.email}`)
+            .then(res => {
+                console.log('Response data:', res.data);
+                // Ensure the data is an array
+                if (Array.isArray(res.data)) {
+                    setPayInfo(res.data);
+                } else {
+                    setPayInfo([]);
+                }
+                setLoading(false);
+            })
+            .catch(err => {
+                console.error('Error fetching payment info:', err);
+                setPayInfo([]);  // Set to empty array in case of error
+                setLoading(false);
+            });
     }, [axiosSecure, user]);
 
     if (loading) {
@@ -36,18 +34,31 @@ const SuccessApoUser = () => {
     if (payInfo.length === 0) {
         return <div>Error: Payment information is not available</div>;
     }
+
     return (
         <div className="p-4">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                {payInfo.map((payment) => (
-                    <div key={payment._id} className="p-4 border rounded-lg shadow-md bg-white">
-                        <p className="text-lg font-semibold">Customer Name: {payment.cus_name}</p>
-                        <p className="text-sm">Payment ID: {payment.paymentId}</p>
-                        <p className="text-sm">Amount: ${payment.amount}</p>
-                        <p className={`text-sm font-bold ${payment.status === 'Success' ? 'text-green-600' : 'text-red-600'}`}>Status: {payment.status}</p>
-                    </div>
-                ))}
-            </div>
+            <table className="min-w-full border-collapse border border-gray-200">
+                <thead>
+                    <tr>
+                        <th className="border border-gray-300 px-4 py-2">Customer Name</th>
+                        <th className="border border-gray-300 px-4 py-2">Payment ID</th>
+                        <th className="border border-gray-300 px-4 py-2">Amount</th>
+                        <th className="border border-gray-300 px-4 py-2">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {payInfo.map((payment) => (
+                        <tr key={payment._id} className="bg-white">
+                            <td className="border border-gray-300 px-4 py-2">{payment.cus_name}</td>
+                            <td className="border border-gray-300 px-4 py-2">{payment.paymentId}</td>
+                            <td className="border border-gray-300 px-4 py-2">${payment.amount}</td>
+                            <td className={`border border-gray-300 px-4 py-2 font-bold ${payment.status === 'Success' ? 'text-green-600' : 'text-red-600'}`}>
+                                {payment.status}
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
         </div>
     );
 };
