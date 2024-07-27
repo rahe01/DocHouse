@@ -2,7 +2,7 @@ import { useState } from "react";
 import { GrLogout } from "react-icons/gr";
 import { AiOutlineBars } from "react-icons/ai";
 import { FaChartPie } from "react-icons/fa";
-import { MdPersonAdd, MdAssignmentInd, MdEvent, MdAccountCircle, MdBook, MdDashboard } from "react-icons/md"; // Add icons for new menu items
+import { MdPersonAdd, MdAssignmentInd, MdEvent, MdAccountCircle, MdBook,} from "react-icons/md"; // Add icons for new menu items
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../../Hooks/useAuth";
 import MenuItem from "./MenuItem";
@@ -83,19 +83,14 @@ const Sidebar = () => {
           <div className="flex flex-col justify-between flex-1 mt-6">
             <nav>
               {/* Common Routes */}
-              <MenuItem
-                label="Dashboard"
-                address="/dashboard"
-                icon={<MdDashboard className="text-blue-500" />}
-              />
-              
+        
               {/* Admin Routes */}
               <h1 className="text-xl font-bold text-center my-5">Admin Routes</h1>
           
                 <>
                   <MenuItem
                     label="Statistics"
-                    address="/dashboard/statistict"
+                    address="/dashboard"
                     icon={<FaChartPie className="text-green-500" />}
                   />
                   <MenuItem

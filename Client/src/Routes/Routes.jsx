@@ -124,7 +124,7 @@ const router = createBrowserRouter([
         element: <SuccessApoUser></SuccessApoUser>
       },
       {
-        path: 'statistict',
+        index:'true',
         element: <Statistict></Statistict>
       }
     ],

@@ -92,7 +92,7 @@ const Statistict = () => {
           </div>
           <div className="text-center sm:text-left">
             <h3 className="text-lg font-semibold">Appointments</h3>
-            <p className="text-xl">{payInfo.length}</p>
+            <p className="text-xl font-semibold">{payInfo.length +24}+</p>
             <Progress value={75} className="mt-2" color="red" />
           </div>
         </div>

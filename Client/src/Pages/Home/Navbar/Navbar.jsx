@@ -14,9 +14,7 @@ import {
 import {
   UserCircleIcon,
   ChevronDownIcon,
-  Cog6ToothIcon,
-  InboxArrowDownIcon,
-  LifebuoyIcon,
+
   PowerIcon,
   Bars2Icon,
 } from "@heroicons/react/24/solid";
@@ -32,28 +30,10 @@ const profileMenuItems = [
     icon: UserCircleIcon,
     path: "/dashboard/profile",
   },
+ 
+
   {
-    label: "Edit Profile",
-    icon: Cog6ToothIcon,
-    path: "/edit-profile",
-  },
-  {
-    label: "Inbox",
-    icon: InboxArrowDownIcon,
-    path: "/inbox",
-  },
-  {
-    label: "Help",
-    icon: LifebuoyIcon,
-    path: "/help",
-  },
-  {
-    label: "Admin Dashboard",
-    icon: FcAcceptDatabase,
-    path: "/admin-dashboard",
-  },
-  {
-    label: "User Dashboard",
+    label: "Dashboard",
     icon: FcAcceptDatabase,
     path: "/dashboard",
   },
