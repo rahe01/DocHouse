@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet";
 import Calender from "./Calender";
 import DocServices from "./DocServices/DocServices";
 
@@ -25,6 +26,10 @@ const Apoinment = () => {
         </div>
       </div>
       <DocServices></DocServices>
+      <Helmet>
+        <title>DocHouse || Appointment </title>
+       
+      </Helmet>
     </div>
   );
 };

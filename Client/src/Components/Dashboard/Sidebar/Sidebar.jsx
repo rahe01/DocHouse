@@ -7,6 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../../Hooks/useAuth";
 import MenuItem from "./MenuItem";
 import { toast } from "react-toastify";
+import { Helmet } from "react-helmet";
 
 const Sidebar = () => {
   const { logOut, } = useAuth();
@@ -30,6 +31,9 @@ const Sidebar = () => {
 
   return (
     <>
+    <Helmet>
+      <title>DocHouse - Dashboard</title>
+    </Helmet>
       {/* Small Screen Navbar */}
       <div className="bg-gray-100 text-gray-800 flex justify-between md:hidden">
         <div className="block cursor-pointer p-4 font-bold">

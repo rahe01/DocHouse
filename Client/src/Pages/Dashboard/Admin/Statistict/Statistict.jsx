@@ -4,6 +4,7 @@ import { Progress } from "@material-tailwind/react";
 import { Line } from "react-chartjs-2";
 import { Chart as ChartJS, LineElement, PointElement, LinearScale, Title, CategoryScale, Tooltip, Legend } from 'chart.js';
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
+import { Helmet } from "react-helmet";
 
 // Register the necessary chart components
 ChartJS.register(LineElement, PointElement, LinearScale, Title, CategoryScale, Tooltip, Legend);
@@ -63,6 +64,9 @@ const Statistict = () => {
 
   return (
     <div className="p-4 space-y-4">
+      <Helmet>
+        <title>Dashboard - Statistic</title>
+      </Helmet>
       <div className="flex flex-wrap justify-evenly space-y-4 sm:space-y-0">
         <div className="flex flex-col items-center sm:flex-row space-x-0 sm:space-x-4 bg-gray-100 p-4 rounded-lg shadow-md w-full sm:w-auto">
           <div className="bg-green-200 p-3 rounded-3xl mb-4 sm:mb-0">

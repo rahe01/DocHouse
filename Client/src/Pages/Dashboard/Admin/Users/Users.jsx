@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import { toast } from "react-toastify";
+import { Helmet } from "react-helmet";
 
 const Users = () => {
     const axiosSecure = useAxiosSecure();
@@ -44,6 +45,9 @@ const Users = () => {
 
     return (
         <div className="p-4">
+            <Helmet>
+                <title>Users | DocHouse</title>
+            </Helmet>
             <h1 className="text-2xl font-bold mb-4">Users</h1>
             {users.length === 0 ? (
                 <div>No users found.</div>

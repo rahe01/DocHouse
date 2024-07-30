@@ -5,6 +5,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { TbFidgetSpinner } from "react-icons/tb";
 import useAuth from "../../Hooks/useAuth";
+import { Helmet } from "react-helmet";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -167,6 +168,9 @@ const SignUp = () => {
           .
         </p>
       </div>
+      <Helmet>
+        <title>Sign Up - DocHouse</title>
+      </Helmet>
     </div>
   );
 };

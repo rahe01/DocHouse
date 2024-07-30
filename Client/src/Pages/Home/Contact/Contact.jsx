@@ -2,9 +2,11 @@ import { IoLocationSharp } from "react-icons/io5";
 import { MdOutlinePermPhoneMsg } from "react-icons/md";
 import Button from "../../../Components/Button/Button";
 
+
 const Contact = () => {
   return (
     <div>
+     
       <div className="flex p-10  md:p-20 bg-[#07332F] text-white items-center justify-center flex-col md:flex-row rounded-xl">
         <div>
           <h1 className="text-4xl font-bold">Contact With Us</h1>
@@ -66,6 +68,8 @@ const Contact = () => {
           </div>
         </form>
       </div>
+   
+      
     </div>
   );
 };

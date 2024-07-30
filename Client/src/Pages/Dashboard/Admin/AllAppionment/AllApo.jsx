@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import useAxiosSecure from '../../../../Hooks/useAxiosSecure';
 import { toast } from 'react-toastify';
+import { Helmet } from 'react-helmet';
 
 const AllApo = () => {
     const axiosSecure = useAxiosSecure();
@@ -45,6 +46,9 @@ const AllApo = () => {
 
     return (
         <div className="p-4">
+            <Helmet>
+                <title>All Pending Appointments - DocHouse</title>
+            </Helmet>
             <h2 className="text-xl font-bold mb-4">All Pending Appointments</h2>
             {appointments.length === 0 ? (
                 <p>No appointments found.</p>

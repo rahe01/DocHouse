@@ -8,10 +8,12 @@ import "./style.css";
 
 // import required modules
 import { Pagination } from "swiper/modules";
+import { Helmet } from "react-helmet";
 
 export default function Hero() {
   return (
     <>
+    
       <Swiper
         pagination={{
           dynamicBullets: true,
@@ -91,6 +93,10 @@ export default function Hero() {
           </div>
         </SwiperSlide>
       </Swiper>
+      <Helmet>
+      <title>Dochouse - Your Best Medical Help Center</title>
+      
+    </Helmet>
     </>
   );
 }

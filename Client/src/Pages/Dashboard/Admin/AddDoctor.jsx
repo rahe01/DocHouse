@@ -10,6 +10,7 @@ import {
   FaTwitter
 } from "react-icons/fa";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import { Helmet } from "react-helmet";
 
 const AddDoctor = () => {
   const { user } = useAuth();
@@ -89,6 +90,9 @@ const AddDoctor = () => {
 
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md">
+      <Helmet>
+        <title>Add Doctor - DocHouse </title>
+      </Helmet>
       <h2 className="text-2xl font-bold mb-4">Add Doctor</h2>
       <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="mb-4">

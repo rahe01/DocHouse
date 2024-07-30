@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import useAuth from "../../../../Hooks/useAuth";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
+import { Helmet } from "react-helmet";
 
 const SuccessApoUser = () => {
     const [payInfo, setPayInfo] = useState([]);
@@ -37,6 +38,9 @@ const SuccessApoUser = () => {
 
     return (
         <div className="p-4">
+            <Helmet>
+                <title>Payment History - DocHouse</title>
+            </Helmet>
             <table className="min-w-full border-collapse border border-gray-200">
                 <thead>
                     <tr>

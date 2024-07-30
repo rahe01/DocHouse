@@ -4,6 +4,7 @@ import Review from "../Pages/Home/Review/Review";
 import Services from "../Pages/Home/Services/Services";
 import Doctor from "../Pages/Home/Doctor/Doctor";
 import Contact from "../Pages/Home/Contact/Contact";
+import { Helmet } from "react-helmet";
 
 
 
@@ -11,6 +12,9 @@ import Contact from "../Pages/Home/Contact/Contact";
 const HomeLay = () => {
     return (
         <div>
+            <Helmet>
+                <title>DocHouse || Home</title>
+            </Helmet>
             <Hero></Hero>
             <Services></Services>
             <LittleDetails></LittleDetails>

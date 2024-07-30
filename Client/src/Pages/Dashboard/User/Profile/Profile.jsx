@@ -1,6 +1,7 @@
 import useAuth from '../../../../Hooks/useAuth';
 import useRole from '../../../../Hooks/useRole';
 import LoadingSpinner from '../../../../Components/LoadingSpinner/LoadingSpinner';
+import { Helmet } from 'react-helmet';
 
 const Profile = () => {
   const { user, loading } = useAuth();
@@ -12,6 +13,9 @@ const Profile = () => {
 
   return (
     <div className='flex justify-center items-center '>
+      <Helmet>
+        <title>User Profile - DocHouse</title>
+      </Helmet>
       <div className='bg-white shadow-xl rounded-3xl w-3/5 overflow-hidden'>
         <img
           alt='profile background'

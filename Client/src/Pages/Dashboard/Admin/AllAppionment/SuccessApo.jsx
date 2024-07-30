@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
+import { Helmet } from "react-helmet";
 
 const SuccessApo = () => {
     const [payInfo, setPayInfo] = useState([]);
@@ -15,6 +16,9 @@ const SuccessApo = () => {
 
     return (
         <div className="p-4">
+            <Helmet>
+                <title>Payment Information - DocHouse</title>
+            </Helmet>
             {payInfo.length > 0 ? (
                 <div className="overflow-x-auto">
                     <table className="min-w-full border-collapse border border-gray-200">

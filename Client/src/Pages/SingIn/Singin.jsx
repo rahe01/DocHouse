@@ -2,6 +2,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { FcGoogle } from 'react-icons/fc'
 import useAuth from '../../Hooks/useAuth'
 import { toast } from 'react-toastify'
+import { Helmet } from 'react-helmet'
 
 
 const Singin = () => {
@@ -146,6 +147,10 @@ const Singin = () => {
           .
         </p>
       </div>
+      <Helmet>
+        <title>Log In - DocHouse</title>
+        
+      </Helmet>
     </div>
   )
 }

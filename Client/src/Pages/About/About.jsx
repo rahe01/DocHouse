@@ -1,12 +1,14 @@
 
 import about from '../../../public/about.json';
 import LittleDetails from '../Home/LittleDetails/LittleDetails';
+import {Helmet} from "react-helmet";
 
 const About = () => {
   const { clinicName, missionStatement, dentist, clinicDetails, team, testimonials } = about.aboutSection;
 
   return (
     <div className="about-container p-6 bg-gray-100">
+    
       <h1 className="text-4xl font-bold text-center mb-4">{clinicName}</h1>
       <p className="text-xl text-center mb-8">{missionStatement}</p>
 
@@ -65,6 +67,11 @@ const About = () => {
       </div>
 
       <LittleDetails></LittleDetails>
+      <Helmet>
+        <title>{clinicName} | About Us</title>
+        <meta name="description" content={missionStatement} />
+      </Helmet>
+   
     </div>
   );
 };
